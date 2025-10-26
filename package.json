@@ -1,0 +1,50 @@
+{
+  "name": "marvel-quiz",
+  "version": "2.0.0",
+  "description": "An interactive quiz application testing knowledge of the Marvel Cinematic Universe",
+  "main": "script.js",
+  "scripts": {
+    "start": "npx http-server -p 8000 -o",
+    "dev": "npx live-server --port=8000",
+    "lint:js": "npx eslint script.js",
+    "lint:css": "npx stylelint style.css",
+    "format": "npx prettier --write *.{html,css,js,md}",
+    "validate": "npx html-validate index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StrayDogSyndicate/Marvel-Quiz.git"
+  },
+  "keywords": [
+    "marvel",
+    "quiz",
+    "trivia",
+    "mcu",
+    "interactive",
+    "game",
+    "superhero",
+    "javascript",
+    "bootstrap",
+    "web-app"
+  ],
+  "author": "Stray Dog Syndicate",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/StrayDogSyndicate/Marvel-Quiz/issues"
+  },
+  "homepage": "https://github.com/StrayDogSyndicate/Marvel-Quiz#readme",
+  "devDependencies": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions",
+    "iOS >= 12",
+    "Android >= 6"
+  ]
+}

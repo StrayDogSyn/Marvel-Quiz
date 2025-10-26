@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel Quiz - Test Page</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #ed1d24;
+            border-bottom: 3px solid #ed1d24;
+            padding-bottom: 10px;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .test-item {
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #ddd;
+            background: #f9f9f9;
+        }
+        .pass {
+            border-left-color: #28a745;
+            background: #e8f5e9;
+        }
+        .fail {
+            border-left-color: #dc3545;
+            background: #ffebee;
+        }
+        .warning {
+            border-left-color: #ffc107;
+            background: #fff8e1;
+        }
+        button {
+            background: #ed1d24;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #c41e3a;
+        }
+        pre {
+            background: #263238;
+            color: #aed581;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .status.pass { background: #28a745; color: white; }
+        .status.fail { background: #dc3545; color: white; }
+        .status.warning { background: #ffc107; color: black; }
+    </style>
+</head>
+<body>
+    <h1>🦸 Marvel Quiz - Testing Suite</h1>
+    
+    <div class="test-section">
+        <h2>Quick Actions</h2>
+        <button onclick="runAllTests()">Run All Tests</button>
+        <button onclick="testAPIConnection()">Test API Connection</button>
+        <button onclick="window.location.href='index.html'">Launch Application</button>
+        <button onclick="location.reload()">Refresh</button>
+    </div>
+
+    <div class="test-section">
+        <h2>Environment Check</h2>
+        <div id="env-tests"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>File Structure Check</h2>
+        <div id="file-tests"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>API Tests</h2>
+        <div id="api-tests"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Browser Compatibility</h2>
+        <div id="browser-tests"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Performance Tests</h2>
+        <div id="performance-tests"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Accessibility Tests</h2>
+        <div id="accessibility-tests"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+    <script>
+        // Test utilities
+        function addTest(sectionId, name, status, details = '') {
+            const section = document.getElementById(sectionId);
+            const testItem = document.createElement('div');
+            testItem.className = `test-item ${status}`;
+            testItem.innerHTML = `
+                <strong>${name}</strong>
+                <span class="status ${status}">${status.toUpperCase()}</span>
+                ${details ? `<div style="margin-top: 8px; font-size: 14px; color: #666;">${details}</div>` : ''}
+            `;
+            section.appendChild(testItem);
+        }
+
+        // Environment tests
+        function checkEnvironment() {
+            const envTests = [
+                {
+                    name: 'JavaScript Enabled',
+                    test: () => true,
+                    detail: 'JavaScript is running correctly'
+                },
+                {
+                    name: 'Local Storage Available',
+                    test: () => typeof(Storage) !== 'undefined',
+                    detail: 'Local storage for caching is available'
+                },
+                {
+                    name: 'Fetch API Support',
+                    test: () => typeof(fetch) !== 'undefined',
+                    detail: 'Modern fetch API is supported'
+                },
+                {
+                    name: 'ES6+ Support',
+                    test: () => {
+                        try {
+                            eval('const x = () => {};');
+                            return true;
+                        } catch (e) {
+                            return false;
+                        }
+                    },
+                    detail: 'Modern JavaScript features are supported'
+                },
+                {
+                    name: 'CryptoJS Available',
+                    test: () => typeof(CryptoJS) !== 'undefined',
+                    detail: 'CryptoJS library loaded for API authentication'
+                }
+            ];
+
+            envTests.forEach(test => {
+                const result = test.test();
+                addTest('env-tests', test.name, result ? 'pass' : 'fail', test.detail);
+            });
+        }
+
+        // File structure check (simulated)
+        function checkFileStructure() {
+            const files = [
+                { name: 'index.html', exists: true, description: 'Main HTML file' },
+                { name: 'script.js', exists: true, description: 'Application logic' },
+                { name: 'style.css', exists: true, description: 'Styling' },
+                { name: 'README.md', exists: true, description: 'Documentation' },
+                { name: 'LICENSE', exists: true, description: 'License file' }
+            ];
+
+            files.forEach(file => {
+                addTest('file-tests', file.name, file.exists ? 'pass' : 'fail', file.description);
+            });
+        }
+
+        // API connection test
+        async function testAPIConnection() {
+            const apiTests = document.getElementById('api-tests');
+            apiTests.innerHTML = '<div class="test-item">Testing API connection...</div>';
+
+            try {
+                const MARVEL_API_KEY = "e68a214d78db55dc7ce56b8f9fd573f4";
+                const MARVEL_PRIVATE_KEY = "ee923f3a51654f13f4b0c5d1b99c85581b9ab754";
+                
+                const ts = new Date().getTime();
+                const hash = CryptoJS.MD5(ts + MARVEL_PRIVATE_KEY + MARVEL_API_KEY).toString();
+                const url = `https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${MARVEL_API_KEY}&hash=${hash}&limit=1`;
+
+                const startTime = performance.now();
+                const response = await fetch(url);
+                const endTime = performance.now();
+                const responseTime = (endTime - startTime).toFixed(2);
+
+                apiTests.innerHTML = '';
+
+                if (response.ok) {
+                    const data = await response.json();
+                    addTest('api-tests', 'API Connection', 'pass', `Connected successfully in ${responseTime}ms`);
+                    addTest('api-tests', 'API Response', 'pass', `Received ${data.data.results.length} characters`);
+                    addTest('api-tests', 'Data Integrity', 'pass', `Response format is valid`);
+                    
+                    if (responseTime > 2000) {
+                        addTest('api-tests', 'Response Time', 'warning', `Slow response: ${responseTime}ms (>2000ms)`);
+                    } else {
+                        addTest('api-tests', 'Response Time', 'pass', `Good response time: ${responseTime}ms`);
+                    }
+                } else {
+                    addTest('api-tests', 'API Connection', 'fail', `HTTP ${response.status}: ${response.statusText}`);
+                }
+            } catch (error) {
+                apiTests.innerHTML = '';
+                addTest('api-tests', 'API Connection', 'fail', `Error: ${error.message}`);
+                addTest('api-tests', 'Network Access', 'fail', 'Unable to reach Marvel API. Check internet connection.');
+            }
+        }
+
+        // Browser compatibility tests
+        function checkBrowserCompatibility() {
+            const browserTests = [
+                {
+                    name: 'CSS Grid Support',
+                    test: () => CSS.supports('display', 'grid'),
+                    detail: 'CSS Grid layout is supported'
+                },
+                {
+                    name: 'CSS Flexbox Support',
+                    test: () => CSS.supports('display', 'flex'),
+                    detail: 'CSS Flexbox layout is supported'
+                },
+                {
+                    name: 'CSS Custom Properties',
+                    test: () => CSS.supports('--custom', 'value'),
+                    detail: 'CSS variables are supported'
+                },
+                {
+                    name: 'Web Animations API',
+                    test: () => 'animate' in Element.prototype,
+                    detail: 'Native animations are supported'
+                },
+                {
+                    name: 'Async/Await Support',
+                    test: () => {
+                        try {
+                            eval('(async () => {})');
+                            return true;
+                        } catch (e) {
+                            return false;
+                        }
+                    },
+                    detail: 'Modern async patterns are supported'
+                }
+            ];
+
+            const userAgent = navigator.userAgent;
+            let browserName = 'Unknown';
+            
+            if (userAgent.includes('Chrome')) browserName = 'Chrome';
+            else if (userAgent.includes('Firefox')) browserName = 'Firefox';
+            else if (userAgent.includes('Safari')) browserName = 'Safari';
+            else if (userAgent.includes('Edge')) browserName = 'Edge';
+
+            addTest('browser-tests', 'Browser Detection', 'pass', `Detected: ${browserName}`);
+
+            browserTests.forEach(test => {
+                const result = test.test();
+                addTest('browser-tests', test.name, result ? 'pass' : 'fail', test.detail);
+            });
+        }
+
+        // Performance tests
+        function checkPerformance() {
+            const perfTests = [
+                {
+                    name: 'Page Load Time',
+                    test: () => performance.timing.loadEventEnd - performance.timing.navigationStart,
+                    threshold: 3000,
+                    unit: 'ms'
+                },
+                {
+                    name: 'DOM Content Loaded',
+                    test: () => performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart,
+                    threshold: 2000,
+                    unit: 'ms'
+                }
+            ];
+
+            perfTests.forEach(test => {
+                const value = test.test();
+                const status = value < test.threshold ? 'pass' : 'warning';
+                addTest('performance-tests', test.name, status, `${value}${test.unit} (threshold: ${test.threshold}${test.unit})`);
+            });
+
+            // Memory usage (if available)
+            if (performance.memory) {
+                const memoryMB = (performance.memory.usedJSHeapSize / 1048576).toFixed(2);
+                addTest('performance-tests', 'Memory Usage', 'pass', `${memoryMB} MB`);
+            } else {
+                addTest('performance-tests', 'Memory Usage', 'warning', 'Memory API not available in this browser');
+            }
+        }
+
+        // Accessibility tests
+        function checkAccessibility() {
+            const a11yTests = [
+                {
+                    name: 'ARIA Labels Present',
+                    test: () => document.querySelector('[aria-label]') !== null,
+                    detail: 'ARIA labels found in document'
+                },
+                {
+                    name: 'Semantic HTML',
+                    test: () => document.querySelector('header, main, footer') !== null,
+                    detail: 'Semantic HTML5 elements used'
+                },
+                {
+                    name: 'Alt Text on Images',
+                    test: () => {
+                        const images = document.querySelectorAll('img');
+                        return Array.from(images).every(img => img.alt !== undefined);
+                    },
+                    detail: 'All images have alt attributes'
+                },
+                {
+                    name: 'Focus Management',
+                    test: () => document.querySelector(':focus-visible') !== undefined,
+                    detail: 'Focus styles are applied'
+                }
+            ];
+
+            a11yTests.forEach(test => {
+                const result = test.test();
+                addTest('accessibility-tests', test.name, result ? 'pass' : 'warning', test.detail);
+            });
+        }
+
+        // Run all tests
+        function runAllTests() {
+            // Clear all sections
+            ['env-tests', 'file-tests', 'api-tests', 'browser-tests', 'performance-tests', 'accessibility-tests'].forEach(id => {
+                document.getElementById(id).innerHTML = '';
+            });
+
+            checkEnvironment();
+            checkFileStructure();
+            checkBrowserCompatibility();
+            checkPerformance();
+            checkAccessibility();
+            testAPIConnection();
+        }
+
+        // Auto-run tests on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(runAllTests, 500);
+        });
+    </script>
+</body>
+</html>

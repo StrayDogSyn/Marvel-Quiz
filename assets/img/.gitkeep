@@ -1,0 +1,33 @@
+# 📸 Screenshots Directory
+
+## How to Add Screenshots
+
+1. Take screenshots of your application
+2. Save them in this directory with the following names:
+   - `screenshot.png` - Main preview (recommended: 1200x630px)
+   - `welcome.png` - Welcome screen
+   - `quiz.png` - Quiz in action
+   - `results.png` - Results screen
+
+3. The main README.md will automatically display `screenshot.png`
+
+## Recommended Dimensions
+
+- **Main Screenshot**: 1200x630px (GitHub social preview)
+- **Other Screenshots**: 1920x1080px or 1280x720px
+
+## Tips for Great Screenshots
+
+- Use actual quiz data (not Lorem Ipsum)
+- Include browser chrome for context
+- Show key features in action
+- Use light backgrounds for better visibility
+- Crop unnecessary whitespace
+
+## Alternative: Use Placeholder
+
+Until you add your own screenshot, the README will show a link.
+You can use services like:
+- https://placeholder.com/
+- https://via.placeholder.com/
+- Or create a simple banner with Canva/Figma
