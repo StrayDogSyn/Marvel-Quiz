@@ -374,7 +374,7 @@ Contributions are welcome! Please follow these steps:
 - 🐛 **Found a bug?** [Report it here](https://github.com/StrayDogSyndicate/Marvel-Quiz/issues/new?template=bug_report.yml)
 - ✨ **Have an idea?** [Request a feature](https://github.com/StrayDogSyndicate/Marvel-Quiz/issues/new?template=feature_request.yml)
 
-## � Documentation
+## 📚 Documentation
 
 | Document | Description |
 |----------|-------------|
@@ -383,6 +383,7 @@ Contributions are welcome! Please follow these steps:
 | [📝 Changelog](./docs/CHANGELOG.md) | Version history and updates |
 | [🚀 Quick Start](./docs/QUICKSTART.md) | Get started in 3 minutes |
 | [📊 Project Summary](./docs/PROJECT_SUMMARY.md) | Complete transformation overview |
+| [📁 Directory Structure](./docs/DIRECTORY_STRUCTURE.md) | Professional organization & best practices |
 | [📜 Code of Conduct](./docs/CODE_OF_CONDUCT.md) | Community guidelines |
 
 ## �️ Roadmap

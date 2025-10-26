@@ -5,11 +5,14 @@
   "main": "script.js",
   "scripts": {
     "start": "npx http-server -p 8000 -o",
-    "dev": "npx live-server --port=8000",
+    "dev": "npx live-server --port=8000 --open=index.html",
+    "test": "npx http-server -p 8000 -o test.html",
     "lint:js": "npx eslint script.js",
     "lint:css": "npx stylelint style.css",
+    "lint:html": "npx html-validate index.html",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
     "format": "npx prettier --write *.{html,css,js,md}",
-    "validate": "npx html-validate index.html"
+    "validate": "npm run lint"
   },
   "repository": {
     "type": "git",
