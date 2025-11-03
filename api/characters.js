@@ -61,11 +61,21 @@ module.exports = async (req, res) => {
 
     const url = `${MARVEL_API_BASE}/characters?${params}`;
 
+    // Dynamically import node-fetch for environments that need it
+    // Vercel runtime has native fetch in newer versions
+    let fetchFn = globalThis.fetch;
+    if (!fetchFn) {
+      const nodeFetch = await import('node-fetch');
+      fetchFn = nodeFetch.default || nodeFetch;
+    }
+
     // Fetch from Marvel API
-    const response = await fetch(url);
+    const response = await fetchFn(url);
     
     if (!response.ok) {
-      throw new Error(`Marvel API error: ${response.status}`);
+      const errorText = await response.text();
+      console.error('Marvel API error response:', errorText);
+      throw new Error(`Marvel API error: ${response.status} - ${errorText}`);
     }
 
     const data = await response.json();
