@@ -213,7 +213,21 @@ export default async function handler(req, res) {
     });
 
     const characters = await Promise.all(characterPromises);
-    const validCharacters = characters.filter(char => char !== null && char.response === 'success');
+    
+    // Filter for valid Marvel characters only
+    const validCharacters = characters.filter(char => {
+      if (char === null || char.response !== 'success') return false;
+      
+      // Verify it's a Marvel character
+      const publisher = char.biography?.publisher?.toLowerCase() || '';
+      const isMarvel = publisher.includes('marvel');
+      
+      if (!isMarvel) {
+        console.warn(`Filtered out non-Marvel character: ${char.name} (Publisher: ${char.biography?.publisher})`);
+      }
+      
+      return isMarvel;
+    });
 
     // If API failed completely and fallback is enabled, use fallback data
     if (validCharacters.length === 0 && ENABLE_FALLBACK) {
