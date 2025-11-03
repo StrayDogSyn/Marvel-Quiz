@@ -248,30 +248,70 @@ export default async function handler(req, res) {
         limit: limit,
         total: validCharacters.length,
         count: validCharacters.length,
-        results: validCharacters.map(char => ({
-          id: char.id,
-          name: char.name,
-          description: char.biography?.['full-name'] 
-            ? `Also known as ${char.biography['full-name']}. ${char.work?.occupation || ''} ${char.biography['place-of-birth'] ? `Born in ${char.biography['place-of-birth']}.` : ''}`
-            : char.work?.occupation || 'A superhero from the Marvel universe.',
-          thumbnail: {
-            path: char.image?.url || '',
-            extension: ''
-          },
-          // Enhanced metadata
-          powerstats: char.powerstats,
-          biography: char.biography,
-          appearance: char.appearance,
-          work: char.work,
-          connections: char.connections,
-          difficulty: char.difficulty,
-          priority: char.priority,
-          // Additional computed fields
-          totalPower: Object.values(char.powerstats || {})
-            .filter(v => v !== 'null' && !isNaN(parseInt(v)))
-            .reduce((sum, val) => sum + parseInt(val), 0),
-          primaryTeam: char.connections?.['group-affiliation']?.split(',')[0]?.trim() || 'Independent'
-        }))
+        results: validCharacters.map(char => {
+          // Build a clean description
+          const parts = [];
+          const characterName = char.name?.toLowerCase() || '';
+          
+          // Only include full name if it doesn't give away the answer
+          if (char.biography?.['full-name'] && 
+              char.biography['full-name'] !== '-' &&
+              !char.biography['full-name'].toLowerCase().includes(characterName)) {
+            parts.push(`Also known as ${char.biography['full-name']}`);
+          }
+          
+          if (char.work?.occupation && char.work.occupation !== '-') {
+            parts.push(char.work.occupation);
+          }
+          
+          if (char.biography?.['place-of-birth'] && char.biography['place-of-birth'] !== '-') {
+            parts.push(`Born in ${char.biography['place-of-birth']}`);
+          }
+          
+          // Add aliases if they don't reveal the character name
+          if (char.biography?.aliases && 
+              Array.isArray(char.biography.aliases) && 
+              char.biography.aliases.length > 0) {
+            const safeAliases = char.biography.aliases
+              .filter(alias => alias !== '-' && 
+                              !alias.toLowerCase().includes(characterName))
+              .slice(0, 2); // Limit to 2 aliases
+            if (safeAliases.length > 0) {
+              parts.push(`Known aliases: ${safeAliases.join(', ')}`);
+            }
+          }
+          
+          // Create a clean, readable description
+          let description = parts.length > 0 
+            ? parts.join('. ') + '.'
+            : 'A superhero from the Marvel universe.';
+          
+          // Clean up double periods and extra spaces
+          description = description.replace(/\.\./g, '.').replace(/\s+/g, ' ').trim();
+          
+          return {
+            id: char.id,
+            name: char.name,
+            description: description,
+            thumbnail: {
+              path: char.image?.url || '',
+              extension: ''
+            },
+            // Enhanced metadata
+            powerstats: char.powerstats,
+            biography: char.biography,
+            appearance: char.appearance,
+            work: char.work,
+            connections: char.connections,
+            difficulty: char.difficulty,
+            priority: char.priority,
+            // Additional computed fields
+            totalPower: Object.values(char.powerstats || {})
+              .filter(v => v !== 'null' && !isNaN(parseInt(v)))
+              .reduce((sum, val) => sum + parseInt(val), 0),
+            primaryTeam: char.connections?.['group-affiliation']?.split(',')[0]?.trim() || 'Independent'
+          };
+        })
       }
     };
 

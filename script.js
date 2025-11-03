@@ -281,14 +281,26 @@ class QuestionGenerator {
       ...wrongAnswers.map(c => this.cleanCharacterName(c.name))
     ]);
 
-    // Truncate description for better UX
-    const description = character.description.length > 150
-      ? character.description.substring(0, 150) + '...'
-      : character.description;
+    // Clean and format the description
+    let description = character.description || 'A superhero from the Marvel universe.';
+    
+    // Remove trailing periods before truncating
+    description = description.replace(/\.\s*$/, '');
+    
+    // Truncate if too long
+    if (description.length > 150) {
+      description = description.substring(0, 150).trim();
+      // Clean up incomplete sentences
+      const lastPeriod = description.lastIndexOf('.');
+      if (lastPeriod > 50) {
+        description = description.substring(0, lastPeriod);
+      }
+      description += '...';
+    }
 
     return {
       type: 'description',
-      question: `Which character matches this description?\n\n"${description}"`,
+      question: `Which character matches this description? "${description}"`,
       answers: answers,
       correctAnswer: this.cleanCharacterName(character.name),
       explanation: character.description
