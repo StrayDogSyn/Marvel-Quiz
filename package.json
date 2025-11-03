@@ -39,8 +39,8 @@
   "devDependencies": {},
   "dependencies": {},
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=6.0.0"
+    "node": "18.x",
+    "npm": ">=8.0.0"
   },
   "browserslist": [
     "last 2 Chrome versions",
