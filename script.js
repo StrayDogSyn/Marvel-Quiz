@@ -2,7 +2,7 @@
  * Marvel Quiz Application
  * A modern, interactive quiz application using the SuperHero API
  * Migrated from Marvel API (deprecated October 29, 2025)
- * @version 3.0.0
+ * @version 3.0.1
  */
 
 // ===========================
