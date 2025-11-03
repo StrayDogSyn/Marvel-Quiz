@@ -2,7 +2,7 @@
  * Marvel Quiz Application
  * A modern, interactive quiz application using the SuperHero API
  * Migrated from Marvel API (deprecated October 29, 2025)
- * @version 3.0.1
+ * @version 3.0.2
  */
 
 // ===========================
@@ -10,7 +10,10 @@
 // ===========================
 const CONFIG = {
   // API endpoint - uses serverless function to fetch SuperHero API data
-  API_ENDPOINT: '/api/superhero-characters',
+  // Must use full Vercel URL when hosted on GitHub Pages
+  API_ENDPOINT: window.location.hostname === 'straydogsyn.github.io' 
+    ? 'https://marvel-quiz-project-ihuxs5kyp-eric-hunter-petross-projects.vercel.app/api/superhero-characters'
+    : '/api/superhero-characters',
   
   // Quiz settings
   DEFAULT_QUESTION_COUNT: 5,
