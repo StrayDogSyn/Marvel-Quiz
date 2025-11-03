@@ -10,7 +10,7 @@
 
 [![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge&logo=vercel)](https://marvel-quiz-project-ihuxs5kyp-eric-hunter-petross-projects.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
-[![Version](https://img.shields.io/badge/version-3.0.0-blue?style=for-the-badge)](./docs/CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-3.0.2-blue?style=for-the-badge)](./docs/CHANGELOG.md)
 [![Status](https://img.shields.io/badge/status-active-green?style=for-the-badge)](./SUPERHERO_API_MIGRATION.md)
 
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
