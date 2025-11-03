@@ -1,0 +1,476 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-11-02",
+  "description": "Fallback character data for Marvel Quiz - stable offline datasource",
+  "difficulty": {
+    "easy": [
+      {
+        "question": "Who is Spider-Man?",
+        "options": ["Peter Parker", "Clark Kent", "Tony Stark", "Bruce Wayne"],
+        "answer": "Peter Parker",
+        "metadata": {
+          "character": {
+            "name": "Spider-Man",
+            "real_name": "Peter Parker",
+            "first_appearance": "Amazing Fantasy #15 (1962)",
+            "teams": ["Avengers", "Fantastic Four"],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/0/0c/Spiderman50.jpg",
+            "facts": [
+              "Created by Stan Lee and Steve Ditko.",
+              "First appeared in Amazing Fantasy #15.",
+              "Spider-Man can sense danger thanks to his 'Spider-sense'.",
+              "One of Marvel's most popular and iconic superheroes.",
+              "Known for his witty banter and friendly neighborhood hero persona."
+            ],
+            "powerstats": {
+              "intelligence": 90,
+              "strength": 55,
+              "speed": 67,
+              "durability": 75,
+              "power": 74,
+              "combat": 85
+            }
+          }
+        }
+      },
+      {
+        "question": "Which team is Iron Man part of?",
+        "options": ["Avengers", "Justice League", "X-Men", "Suicide Squad"],
+        "answer": "Avengers",
+        "metadata": {
+          "character": {
+            "name": "Iron Man",
+            "real_name": "Tony Stark",
+            "first_appearance": "Tales of Suspense #39 (1963)",
+            "teams": ["Avengers"],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/e/e0/Iron_Man_bleeding_edge.jpg",
+            "facts": [
+              "Iron Man is a founding member of the Avengers.",
+              "Tony Stark is known for his genius-level intellect and powered armor.",
+              "Created by Stan Lee, Larry Lieber, Don Heck, and Jack Kirby.",
+              "Built his first armor while being held captive.",
+              "Has created over 50 different armor suits."
+            ],
+            "powerstats": {
+              "intelligence": 100,
+              "strength": 85,
+              "speed": 58,
+              "durability": 85,
+              "power": 100,
+              "combat": 64
+            }
+          }
+        }
+      },
+      {
+        "question": "What is Captain America's shield made of?",
+        "options": ["Vibranium", "Adamantium", "Steel", "Titanium"],
+        "answer": "Vibranium",
+        "metadata": {
+          "character": {
+            "name": "Captain America",
+            "real_name": "Steve Rogers",
+            "first_appearance": "Captain America Comics #1 (1941)",
+            "teams": ["Avengers", "S.H.I.E.L.D."],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/3/3d/Captain_America_The_First_Avenger_poster.jpg",
+            "facts": [
+              "Enhanced to peak human perfection by the Super Soldier Serum.",
+              "His shield is virtually indestructible.",
+              "Was frozen in ice for decades before being revived.",
+              "Originally created as a patriotic supersoldier during WWII.",
+              "Known for his unwavering moral compass and leadership."
+            ],
+            "powerstats": {
+              "intelligence": 63,
+              "strength": 19,
+              "speed": 35,
+              "durability": 56,
+              "power": 60,
+              "combat": 100
+            }
+          }
+        }
+      },
+      {
+        "question": "What color is the Hulk?",
+        "options": ["Green", "Red", "Blue", "Yellow"],
+        "answer": "Green",
+        "metadata": {
+          "character": {
+            "name": "Hulk",
+            "real_name": "Bruce Banner",
+            "first_appearance": "The Incredible Hulk #1 (1962)",
+            "teams": ["Avengers", "Defenders"],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/a/aa/Hulk_%28circa_2019%29.png",
+            "facts": [
+              "Gets stronger as he gets angrier.",
+              "Created by gamma radiation exposure.",
+              "One of the strongest beings in the Marvel Universe.",
+              "Bruce Banner is a brilliant scientist.",
+              "The phrase 'Hulk smash!' is iconic."
+            ],
+            "powerstats": {
+              "intelligence": 88,
+              "strength": 100,
+              "speed": 63,
+              "durability": 100,
+              "power": 98,
+              "combat": 85
+            }
+          }
+        }
+      },
+      {
+        "question": "What is Thor's hammer called?",
+        "options": ["Mjolnir", "Stormbreaker", "Gungnir", "Hofund"],
+        "answer": "Mjolnir",
+        "metadata": {
+          "character": {
+            "name": "Thor",
+            "real_name": "Thor Odinson",
+            "first_appearance": "Journey into Mystery #83 (1962)",
+            "teams": ["Avengers"],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/3/3c/Thor_%28Marvel_Comics_character%29.png",
+            "facts": [
+              "God of Thunder from Asgard.",
+              "Only those deemed worthy can lift Mjolnir.",
+              "Son of Odin and brother of Loki.",
+              "Based on Norse mythology.",
+              "Controls lightning and storms."
+            ],
+            "powerstats": {
+              "intelligence": 69,
+              "strength": 100,
+              "speed": 83,
+              "durability": 100,
+              "power": 100,
+              "combat": 100
+            }
+          }
+        }
+      }
+    ],
+    "medium": [
+      {
+        "question": "Which Marvel character has the alias 'The Merc with a Mouth'?",
+        "options": ["Deadpool", "Wolverine", "Punisher", "Black Panther"],
+        "answer": "Deadpool",
+        "metadata": {
+          "character": {
+            "name": "Deadpool",
+            "real_name": "Wade Wilson",
+            "first_appearance": "The New Mutants #98 (1991)",
+            "teams": ["X-Force", "Deadpool Corps"],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/6/6b/Deadpool.png",
+            "facts": [
+              "Deadpool is known for breaking the fourth wall and meta humor.",
+              "His healing factor rivals Wolverine's.",
+              "Originally appeared as a villain.",
+              "Disfigured by experiments that gave him his powers.",
+              "Often carries dual katanas and various firearms."
+            ],
+            "powerstats": {
+              "intelligence": 69,
+              "strength": 32,
+              "speed": 50,
+              "durability": 100,
+              "power": 100,
+              "combat": 100
+            }
+          }
+        }
+      },
+      {
+        "question": "Where did Black Panther first appear?",
+        "options": ["Fantastic Four #52", "Amazing Fantasy #15", "X-Men #1", "Avengers #1"],
+        "answer": "Fantastic Four #52",
+        "metadata": {
+          "character": {
+            "name": "Black Panther",
+            "real_name": "T'Challa",
+            "first_appearance": "Fantastic Four #52 (1966)",
+            "teams": ["Avengers"],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/9/9f/Black_Panther_OS_Vol_1_2.png",
+            "facts": [
+              "First mainstream black superhero.",
+              "King of Wakanda.",
+              "Possesses enhanced senses and strength.",
+              "Protects the world's only source of Vibranium.",
+              "Genius-level intellect and master strategist."
+            ],
+            "powerstats": {
+              "intelligence": 88,
+              "strength": 16,
+              "speed": 30,
+              "durability": 60,
+              "power": 41,
+              "combat": 100
+            }
+          }
+        }
+      },
+      {
+        "question": "What metal is bonded to Wolverine's skeleton?",
+        "options": ["Adamantium", "Vibranium", "Titanium", "Carbonadium"],
+        "answer": "Adamantium",
+        "metadata": {
+          "character": {
+            "name": "Wolverine",
+            "real_name": "James 'Logan' Howlett",
+            "first_appearance": "The Incredible Hulk #180 (1974)",
+            "teams": ["X-Men", "Avengers", "X-Force"],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/5/5d/Wolverine_%28James_%22Logan%22_Howlett%29.png",
+            "facts": [
+              "Has retractable adamantium claws.",
+              "Possesses accelerated healing factor.",
+              "Over 100 years old due to slow aging.",
+              "Born in Canada in the late 1800s.",
+              "Known for his berserker rage in combat."
+            ],
+            "powerstats": {
+              "intelligence": 63,
+              "strength": 32,
+              "speed": 50,
+              "durability": 100,
+              "power": 89,
+              "combat": 100
+            }
+          }
+        }
+      },
+      {
+        "question": "Who is the leader of the X-Men?",
+        "options": ["Professor X", "Cyclops", "Storm", "Jean Grey"],
+        "answer": "Professor X",
+        "metadata": {
+          "character": {
+            "name": "Professor X",
+            "real_name": "Charles Xavier",
+            "first_appearance": "The X-Men #1 (1963)",
+            "teams": ["X-Men", "Illuminati"],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/a/a8/Professor_X.png",
+            "facts": [
+              "World's most powerful telepath.",
+              "Founded Xavier's School for Gifted Youngsters.",
+              "Paralyzed and uses a wheelchair.",
+              "Dreams of peaceful coexistence between humans and mutants.",
+              "Created Cerebro to detect mutants worldwide."
+            ],
+            "powerstats": {
+              "intelligence": 88,
+              "strength": 8,
+              "speed": 12,
+              "durability": 28,
+              "power": 100,
+              "combat": 40
+            }
+          }
+        }
+      },
+      {
+        "question": "What is Doctor Strange's civilian profession?",
+        "options": ["Neurosurgeon", "Lawyer", "Teacher", "Engineer"],
+        "answer": "Neurosurgeon",
+        "metadata": {
+          "character": {
+            "name": "Doctor Strange",
+            "real_name": "Stephen Strange",
+            "first_appearance": "Strange Tales #110 (1963)",
+            "teams": ["Avengers", "Defenders", "Illuminati"],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/e/e0/Doctor_Strange_2016_poster.jpg",
+            "facts": [
+              "Sorcerer Supreme and Master of the Mystic Arts.",
+              "Lost the use of his hands in a car accident.",
+              "Wields the Eye of Agamotto (Time Stone).",
+              "Guards Earth from mystical threats.",
+              "Can manipulate time, space, and dimensions."
+            ],
+            "powerstats": {
+              "intelligence": 100,
+              "strength": 10,
+              "speed": 12,
+              "durability": 84,
+              "power": 100,
+              "combat": 60
+            }
+          }
+        }
+      }
+    ],
+    "hard": [
+      {
+        "question": "Which Marvel character is NOT a mutant?",
+        "options": ["Iron Man", "Scarlet Witch", "Cyclops", "Magneto"],
+        "answer": "Iron Man",
+        "metadata": {
+          "character": {
+            "name": "Iron Man",
+            "real_name": "Tony Stark",
+            "first_appearance": "Tales of Suspense #39 (1963)",
+            "teams": ["Avengers"],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/e/e0/Iron_Man_bleeding_edge.jpg",
+            "facts": [
+              "Tony Stark's abilities stem from technology, not mutation.",
+              "Scarlet Witch, Cyclops, and Magneto are mutants.",
+              "Initially created the Iron Man suit to escape captivity.",
+              "Has no inherent superpowers without his armor."
+            ],
+            "powerstats": {
+              "intelligence": 100,
+              "strength": 85,
+              "speed": 58,
+              "durability": 85,
+              "power": 100,
+              "combat": 64
+            }
+          }
+        }
+      },
+      {
+        "question": "What is the real name of Mystique?",
+        "options": ["Raven Darkhölme", "Anna Marie", "Jean Grey", "Betty Ross"],
+        "answer": "Raven Darkhölme",
+        "metadata": {
+          "character": {
+            "name": "Mystique",
+            "real_name": "Raven Darkhölme",
+            "first_appearance": "Ms. Marvel #16 (1978)",
+            "teams": ["Brotherhood of Mutants", "X-Men"],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/0/01/Mystique_%28comics_character%29.jpg",
+            "facts": [
+              "A master shapeshifter and spy.",
+              "Mother of Nightcrawler and adoptive mother of Rogue.",
+              "One of the most prominent mutant terrorists.",
+              "Over 100 years old with extended lifespan.",
+              "Can perfectly mimic anyone's appearance and voice."
+            ],
+            "powerstats": {
+              "intelligence": 75,
+              "strength": 12,
+              "speed": 23,
+              "durability": 32,
+              "power": 54,
+              "combat": 84
+            }
+          }
+        }
+      },
+      {
+        "question": "Who was the first Herald of Galactus?",
+        "options": ["Silver Surfer", "Terrax", "Firelord", "Nova"],
+        "answer": "Silver Surfer",
+        "metadata": {
+          "character": {
+            "name": "Silver Surfer",
+            "real_name": "Norrin Radd",
+            "first_appearance": "Fantastic Four #48 (1966)",
+            "teams": ["Defenders", "Heralds of Galactus"],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/9/98/Silver_Surfer.png",
+            "facts": [
+              "Sacrificed himself to save his homeworld Zenn-La.",
+              "Wields the Power Cosmic granted by Galactus.",
+              "Can travel faster than light on his surfboard.",
+              "Eventually rebelled against Galactus to protect Earth.",
+              "One of the most powerful beings in the Marvel Universe."
+            ],
+            "powerstats": {
+              "intelligence": 94,
+              "strength": 100,
+              "speed": 100,
+              "durability": 100,
+              "power": 100,
+              "combat": 32
+            }
+          }
+        }
+      },
+      {
+        "question": "What is the real name of the villain Thanos?",
+        "options": ["Thanos is his real name", "En Sabah Nur", "Victor von Doom", "Erik Lensherr"],
+        "answer": "Thanos is his real name",
+        "metadata": {
+          "character": {
+            "name": "Thanos",
+            "real_name": "Thanos",
+            "first_appearance": "Iron Man #55 (1973)",
+            "teams": ["Infinity Watch", "Dark Order"],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/1/1c/Thanos_%28Marvel_Comics_character%29.png",
+            "facts": [
+              "Born on Titan, moon of Saturn.",
+              "Obsessed with Death and courting her favor.",
+              "Wielded the Infinity Gauntlet with all six Infinity Stones.",
+              "Nearly wiped out half of all life in the universe.",
+              "One of the most powerful and intelligent beings in Marvel."
+            ],
+            "powerstats": {
+              "intelligence": 100,
+              "strength": 100,
+              "speed": 33,
+              "durability": 100,
+              "power": 100,
+              "combat": 80
+            }
+          }
+        }
+      },
+      {
+        "question": "Which Infinity Stone did Loki use in The Avengers (2012)?",
+        "options": ["Space Stone (Tesseract)", "Mind Stone", "Reality Stone", "Power Stone"],
+        "answer": "Space Stone (Tesseract)",
+        "metadata": {
+          "character": {
+            "name": "Loki",
+            "real_name": "Loki Laufeyson",
+            "first_appearance": "Venus #6 (1949) / Journey into Mystery #85 (1962)",
+            "teams": ["Asgard", "Cabal"],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/1/1d/Loki_%28Marvel_Comics_character%29.png",
+            "facts": [
+              "God of Mischief and adoptive brother of Thor.",
+              "Actually a Frost Giant, son of Laufey.",
+              "Master of magic and illusion.",
+              "Has switched between villain and anti-hero roles.",
+              "One of Marvel's most complex characters."
+            ],
+            "powerstats": {
+              "intelligence": 88,
+              "strength": 63,
+              "speed": 46,
+              "durability": 85,
+              "power": 100,
+              "combat": 60
+            }
+          }
+        }
+      },
+      {
+        "question": "Who created the Ultron AI?",
+        "options": ["Hank Pym", "Tony Stark", "Bruce Banner", "Reed Richards"],
+        "answer": "Hank Pym",
+        "metadata": {
+          "character": {
+            "name": "Ant-Man",
+            "real_name": "Hank Pym",
+            "first_appearance": "Tales to Astonish #27 (1962)",
+            "teams": ["Avengers"],
+            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/5/52/Ant-Man_%28Hank_Pym%29.png",
+            "facts": [
+              "Discovered Pym Particles that enable size manipulation.",
+              "Created Ultron as a peacekeeping AI that went rogue.",
+              "Has used multiple superhero identities: Ant-Man, Giant-Man, Goliath, Yellowjacket.",
+              "Married to Janet van Dyne (The Wasp).",
+              "One of the founding members of the Avengers."
+            ],
+            "powerstats": {
+              "intelligence": 100,
+              "strength": 10,
+              "speed": 35,
+              "durability": 40,
+              "power": 34,
+              "combat": 30
+            }
+          }
+        }
+      }
+    ]
+  }
+}

@@ -64,16 +64,22 @@ class QuizState {
 }
 
 // ===========================
-// SuperHero API Service
+// SuperHero API Service with Fallback
 // ===========================
 class MarvelAPIService {
   /**
    * Fetch Marvel characters using serverless SuperHero API proxy
+   * Supports difficulty levels and automatic fallback
    */
-  static async fetchCharacters(limit = 30) {
+  static async fetchCharacters(limit = 30, difficulty = null) {
     const params = new URLSearchParams({
       count: limit
     });
+
+    // Add difficulty parameter if specified
+    if (difficulty) {
+      params.append('difficulty', difficulty);
+    }
 
     const url = `${CONFIG.API_ENDPOINT}?${params}`;
 
@@ -86,14 +92,30 @@ class MarvelAPIService {
 
       const data = await response.json();
       
-      // Filter characters with sufficient data for quiz questions
+      // Check if using fallback data
+      if (data.source === 'fallback') {
+        console.info('📦 Using fallback data source');
+        UIController.showNotification('Using offline character data', 'info');
+      } else {
+        console.info('🌐 Using SuperHero API data');
+      }
+
+      // Filter and enhance characters with additional computed data
       const validCharacters = data.data.results.filter(char => 
         char.name && 
         char.description && 
         char.description.length > 10 &&
         char.thumbnail &&
         char.thumbnail.path
-      );
+      ).map(char => ({
+        ...char,
+        // Add computed fields for enhanced quiz questions
+        hasHighIntelligence: char.powerstats?.intelligence > 80,
+        hasHighStrength: char.powerstats?.strength > 80,
+        isBalanced: MarvelAPIService.isBalancedCharacter(char.powerstats),
+        dominantStat: MarvelAPIService.getDominantStat(char.powerstats),
+        powerLevel: MarvelAPIService.calculatePowerLevel(char.powerstats)
+      }));
 
       if (validCharacters.length === 0) {
         throw new Error('No valid characters found');
@@ -102,8 +124,75 @@ class MarvelAPIService {
       return validCharacters;
     } catch (error) {
       console.error('Error fetching Marvel data:', error);
+      
+      // Try fallback explicitly
+      try {
+        console.warn('Attempting explicit fallback...');
+        const fallbackUrl = `${CONFIG.API_ENDPOINT}?count=${limit}&fallback=true${difficulty ? `&difficulty=${difficulty}` : ''}`;
+        const fallbackResponse = await fetch(fallbackUrl);
+        if (fallbackResponse.ok) {
+          const fallbackData = await fallbackResponse.json();
+          UIController.showNotification('Using offline character data', 'warning');
+          return fallbackData.data.results;
+        }
+      } catch (fallbackError) {
+        console.error('Fallback also failed:', fallbackError);
+      }
+      
       throw error;
     }
+  }
+
+  /**
+   * Calculate if character has balanced stats
+   */
+  static isBalancedCharacter(powerstats) {
+    if (!powerstats) return false;
+    const stats = Object.values(powerstats)
+      .filter(v => v !== 'null' && !isNaN(parseInt(v)))
+      .map(v => parseInt(v));
+    
+    if (stats.length === 0) return false;
+    
+    const avg = stats.reduce((sum, val) => sum + val, 0) / stats.length;
+    const variance = stats.reduce((sum, val) => sum + Math.pow(val - avg, 2), 0) / stats.length;
+    
+    return Math.sqrt(variance) < 20; // Low variance = balanced
+  }
+
+  /**
+   * Get character's dominant stat
+   */
+  static getDominantStat(powerstats) {
+    if (!powerstats) return null;
+    
+    let maxStat = 0;
+    let dominant = null;
+    
+    Object.entries(powerstats).forEach(([stat, value]) => {
+      const numValue = parseInt(value);
+      if (!isNaN(numValue) && numValue > maxStat) {
+        maxStat = numValue;
+        dominant = stat;
+      }
+    });
+    
+    return dominant;
+  }
+
+  /**
+   * Calculate overall power level
+   */
+  static calculatePowerLevel(powerstats) {
+    if (!powerstats) return 0;
+    
+    const stats = Object.values(powerstats)
+      .filter(v => v !== 'null' && !isNaN(parseInt(v)))
+      .map(v => parseInt(v));
+    
+    if (stats.length === 0) return 0;
+    
+    return Math.round(stats.reduce((sum, val) => sum + val, 0) / stats.length);
   }
 }
 
@@ -415,6 +504,54 @@ class UIController {
   showError(message) {
     this.elements.errorMessage.textContent = message;
     this.showScreen('error');
+  }
+
+  /**
+   * Show notification toast
+   */
+  static showNotification(message, type = 'info') {
+    // Create notification element if it doesn't exist
+    let notificationContainer = document.getElementById('notification-container');
+    if (!notificationContainer) {
+      notificationContainer = document.createElement('div');
+      notificationContainer.id = 'notification-container';
+      notificationContainer.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+        max-width: 350px;
+      `;
+      document.body.appendChild(notificationContainer);
+    }
+
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type} alert-dismissible fade show`;
+    notification.style.cssText = `
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      animation: slideIn 0.3s ease-out;
+    `;
+    
+    const icons = {
+      info: 'fa-info-circle',
+      warning: 'fa-exclamation-triangle',
+      success: 'fa-check-circle',
+      danger: 'fa-times-circle'
+    };
+
+    notification.innerHTML = `
+      <i class="fas ${icons[type] || icons.info} me-2"></i>
+      ${message}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+
+    notificationContainer.appendChild(notification);
+
+    // Auto-dismiss after 5 seconds
+    setTimeout(() => {
+      notification.classList.remove('show');
+      setTimeout(() => notification.remove(), 300);
+    }, 5000);
   }
 
   /**
