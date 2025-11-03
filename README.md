@@ -4,7 +4,7 @@
 
 ### Test Your Knowledge of the Marvel Universe
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge&logo=vercel)](https://marvel-quiz-straydogsyn.vercel.app)
+[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge&logo=vercel)](https://marvel-quiz-project-ihuxs5kyp-eric-hunter-petross-projects.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 [![Version](https://img.shields.io/badge/version-2.0.0-blue?style=for-the-badge)](./docs/CHANGELOG.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](./docs/CONTRIBUTING.md)
@@ -20,7 +20,7 @@
 
 *An interactive quiz application featuring real Marvel characters and dynamic questions*
 
-[🚀 Live Demo](https://marvel-quiz-straydogsyn.vercel.app) • [📖 Documentation](./docs) • [🐛 Report Bug](https://github.com/StrayDogSyn/Marvel-Quiz/issues) • [✨ Request Feature](https://github.com/StrayDogSyn/Marvel-Quiz/issues)
+[🚀 Live Demo](https://marvel-quiz-project-ihuxs5kyp-eric-hunter-petross-projects.vercel.app) • [📖 Documentation](./docs) • [🐛 Report Bug](https://github.com/StrayDogSyn/Marvel-Quiz/issues) • [✨ Request Feature](https://github.com/StrayDogSyn/Marvel-Quiz/issues)
 
 </div>
 
