@@ -2,17 +2,21 @@
 
 # 🦸 Marvel Cinematic Universe Quiz
 
-### Test Your Knowledge of the Marvel Universe
+⚠️ **IMPORTANT NOTICE:** This project is no longer functional due to the Marvel Developer Portal shutdown on October 29, 2025. All Marvel API keys are now invalid and the API is permanently unavailable. See [MARVEL_API_SHUTDOWN.md](MARVEL_API_SHUTDOWN.md) for details and alternative options.
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge&logo=vercel)](https://marvel-quiz-project-ihuxs5kyp-eric-hunter-petross-projects.vercel.app)
+---
+
+### ~~Test Your Knowledge of the Marvel Universe~~ **Archived Project - API Unavailable**
+
+[![Live Demo](https://img.shields.io/badge/demo-archived-inactive?style=for-the-badge&logo=vercel)](https://marvel-quiz-project-ihuxs5kyp-eric-hunter-petross-projects.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 [![Version](https://img.shields.io/badge/version-2.0.0-blue?style=for-the-badge)](./docs/CHANGELOG.md)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](./docs/CONTRIBUTING.md)
+[![Status](https://img.shields.io/badge/status-deprecated-red?style=for-the-badge)](./MARVEL_API_SHUTDOWN.md)
 
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
-[![Marvel API](https://img.shields.io/badge/Marvel-API-ED1D24?style=flat-square&logo=marvel&logoColor=white)](https://developer.marvel.com/)
-[![Maintained](https://img.shields.io/badge/Maintained-Yes-green?style=flat-square)](https://github.com/StrayDogSyn/Marvel-Quiz/graphs/commit-activity)
+[![Marvel API](https://img.shields.io/badge/Marvel-API%20DEPRECATED-ED1D24?style=flat-square&logo=marvel&logoColor=white)](./MARVEL_API_SHUTDOWN.md)
+[![Maintained](https://img.shields.io/badge/Maintained-Archived-orange?style=flat-square)](./MARVEL_API_SHUTDOWN.md)
 
 ---
 
@@ -20,7 +24,9 @@
 
 *An interactive quiz application featuring real Marvel characters and dynamic questions*
 
-[🚀 Live Demo](https://marvel-quiz-project-ihuxs5kyp-eric-hunter-petross-projects.vercel.app) • [📖 Documentation](./docs) • [🐛 Report Bug](https://github.com/StrayDogSyn/Marvel-Quiz/issues) • [✨ Request Feature](https://github.com/StrayDogSyn/Marvel-Quiz/issues)
+**⚠️ Note:** This application no longer functions as the Marvel API was shut down on October 29, 2025.
+
+[📋 Shutdown Notice](./MARVEL_API_SHUTDOWN.md) • [📖 Documentation](./docs) • [� Alternative APIs](./MARVEL_API_SHUTDOWN.md#alternative-options)
 
 </div>
 

@@ -1,8 +1,10 @@
 # Environment Configuration
 
-This project uses environment variables to securely manage API keys and configuration.
+⚠️ **IMPORTANT NOTICE:** As of October 29, 2025, the Marvel Developer Portal has been permanently shut down. This documentation is preserved for historical reference only. **Marvel API keys can no longer be obtained or used.** See [MARVEL_API_SHUTDOWN.md](MARVEL_API_SHUTDOWN.md) for details.
 
-## Setup Instructions
+---
+
+## Historical Setup Instructions (No Longer Applicable)
 
 ### 1. Local Development
 
@@ -11,11 +13,11 @@ This project uses environment variables to securely manage API keys and configur
    cp .env.example .env
    ```
 
-2. **Get your Marvel API keys:**
-   - Visit [Marvel Developer Portal](https://developer.marvel.com/)
-   - Sign up or log in
-   - Go to "My Developer Account"
-   - Copy your **Public Key** and **Private Key**
+2. **Get your Marvel API keys:** ❌ **NO LONGER POSSIBLE**
+   - ~~Visit [Marvel Developer Portal](https://developer.marvel.com/)~~ **SHUT DOWN**
+   - ~~Sign up or log in~~ **UNAVAILABLE**
+   - ~~Go to "My Developer Account"~~ **SERVICE DISCONTINUED**
+   - ~~Copy your **Public Key** and **Private Key**~~ **KEYS INVALID**
 
 3. **Update `.env` file:**
    ```env
@@ -125,6 +127,6 @@ Marvel-Quiz/
 
 ## Getting Help
 
-- **Marvel API Issues:** [Marvel Developer Portal](https://developer.marvel.com/)
+- **Marvel API Issues:** ~~[Marvel Developer Portal](https://developer.marvel.com/)~~ **SHUT DOWN - See [MARVEL_API_SHUTDOWN.md](MARVEL_API_SHUTDOWN.md) for alternatives**
 - **Vercel Environment Variables:** [Vercel Docs](https://vercel.com/docs/environment-variables)
 - **Project Issues:** [GitHub Issues](https://github.com/StrayDogSyn/Marvel-Quiz/issues)
