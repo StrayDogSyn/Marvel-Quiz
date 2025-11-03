@@ -1,7 +1,7 @@
 /**
  * Marvel Quiz Application
  * A modern, interactive quiz application using the Marvel API
- * @version 2.0.0
+ * @version 2.1.1
  */
 
 // ===========================
