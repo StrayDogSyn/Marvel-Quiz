@@ -8,11 +8,8 @@
 // Configuration & Constants
 // ===========================
 const CONFIG = {
-  // Marvel API credentials (Public key only - safe for client-side)
-  // Note: For production, consider using environment variables or a backend proxy
-  MARVEL_PUBLIC_KEY: 'e68a214d78db55dc7ce56b8f9fd573f4',
-  MARVEL_PRIVATE_KEY: 'ee923f3a51654f13f4b0c5d1b99c85581b9ab754',
-  MARVEL_API_BASE: 'https://gateway.marvel.com/v1/public',
+  // API endpoint - uses serverless function to avoid CORS issues
+  API_ENDPOINT: '/api/characters',
   
   // Quiz settings
   DEFAULT_QUESTION_COUNT: 5,
@@ -70,36 +67,22 @@ class QuizState {
 // ===========================
 class MarvelAPIService {
   /**
-   * Generate authentication parameters for Marvel API
-   */
-  static generateAuthParams() {
-    const ts = new Date().getTime().toString();
-    const hash = CryptoJS.MD5(
-      ts + CONFIG.MARVEL_PRIVATE_KEY + CONFIG.MARVEL_PUBLIC_KEY
-    ).toString();
-
-    return { ts, apikey: CONFIG.MARVEL_PUBLIC_KEY, hash };
-  }
-
-  /**
-   * Fetch Marvel characters with enhanced filtering
+   * Fetch Marvel characters using serverless API proxy
    */
   static async fetchCharacters(limit = 50) {
-    const authParams = this.generateAuthParams();
     const params = new URLSearchParams({
-      ...authParams,
       limit: limit,
       offset: Math.floor(Math.random() * 100), // Random offset for variety
       orderBy: '-modified' // Get recently updated characters
     });
 
-    const url = `${CONFIG.MARVEL_API_BASE}/characters?${params}`;
+    const url = `${CONFIG.API_ENDPOINT}?${params}`;
 
     try {
       const response = await fetch(url);
       
       if (!response.ok) {
-        throw new Error(`Marvel API error: ${response.status} ${response.statusText}`);
+        throw new Error(`API error: ${response.status} ${response.statusText}`);
       }
 
       const data = await response.json();
