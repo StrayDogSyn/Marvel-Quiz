@@ -262,7 +262,9 @@ class QuestionGenerator {
     return {
       type: 'name',
       question: 'Who is this character?',
-      image: `${character.thumbnail.path}.${character.thumbnail.extension}`,
+      image: character.thumbnail.extension 
+        ? `${character.thumbnail.path}.${character.thumbnail.extension}`
+        : character.thumbnail.path,
       answers: answers,
       correctAnswer: this.cleanCharacterName(character.name),
       explanation: character.description || `${character.name} is a Marvel character.`

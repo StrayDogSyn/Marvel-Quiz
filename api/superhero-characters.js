@@ -255,8 +255,8 @@ export default async function handler(req, res) {
             ? `Also known as ${char.biography['full-name']}. ${char.work?.occupation || ''} ${char.biography['place-of-birth'] ? `Born in ${char.biography['place-of-birth']}.` : ''}`
             : char.work?.occupation || 'A superhero from the Marvel universe.',
           thumbnail: {
-            path: char.image?.url?.replace(/\.[^/.]+$/, '') || '',
-            extension: char.image?.url?.match(/\.([^/.]+)$/)?.[1] || 'jpg'
+            path: char.image?.url || '',
+            extension: ''
           },
           // Enhanced metadata
           powerstats: char.powerstats,
