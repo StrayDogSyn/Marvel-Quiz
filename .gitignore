@@ -25,7 +25,8 @@ desktop.ini
 .env.test.local
 .env.production.local
 
-# Logs
+# Vercel
+.vercel
 logs/
 *.log
 npm-debug.log*

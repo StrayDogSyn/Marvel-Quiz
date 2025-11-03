@@ -1,11 +1,17 @@
 /**
  * Vercel Serverless Function - Marvel API Proxy
  * This function proxies requests to the Marvel API to avoid CORS issues
+ * 
+ * Environment Variables Required:
+ * - MARVEL_PUBLIC_KEY: Your Marvel API public key
+ * - MARVEL_PRIVATE_KEY: Your Marvel API private key
+ * 
+ * Get your keys from: https://developer.marvel.com/
  */
 
-// Marvel API Configuration
-const MARVEL_PUBLIC_KEY = 'e68a214d78db55dc7ce56b8f9fd573f4';
-const MARVEL_PRIVATE_KEY = 'ee923f3a51654f13f4b0c5d1b99c85581b9ab754';
+// Marvel API Configuration from environment variables
+const MARVEL_PUBLIC_KEY = process.env.MARVEL_PUBLIC_KEY;
+const MARVEL_PRIVATE_KEY = process.env.MARVEL_PRIVATE_KEY;
 const MARVEL_API_BASE = 'https://gateway.marvel.com/v1/public';
 
 // Import crypto for MD5 hashing (Node.js built-in)
@@ -42,6 +48,11 @@ module.exports = async (req, res) => {
   }
 
   try {
+    // Validate environment variables
+    if (!MARVEL_PUBLIC_KEY || !MARVEL_PRIVATE_KEY) {
+      throw new Error('Marvel API keys not configured. Please set MARVEL_PUBLIC_KEY and MARVEL_PRIVATE_KEY environment variables.');
+    }
+
     // Generate authentication parameters
     const ts = new Date().getTime().toString();
     const hash = generateHash(ts, MARVEL_PRIVATE_KEY, MARVEL_PUBLIC_KEY);
