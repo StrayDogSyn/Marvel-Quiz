@@ -8,7 +8,7 @@
 
 ### Test Your Knowledge of the Marvel Universe
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge&logo=vercel)](https://marvel-quiz-project-ajvikhggx-eric-hunter-petross-projects.vercel.app)
+[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge&logo=vercel)](https://marvel-quiz-project-gz64pgi9x-eric-hunter-petross-projects.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 [![Version](https://img.shields.io/badge/version-3.0.2-blue?style=for-the-badge)](./docs/CHANGELOG.md)
 [![Status](https://img.shields.io/badge/status-active-green?style=for-the-badge)](./SUPERHERO_API_MIGRATION.md)
@@ -24,7 +24,7 @@
 
 *An interactive quiz application featuring real Marvel characters and dynamic questions*
 
-[🚀 Live Demo](https://marvel-quiz-project-ajvikhggx-eric-hunter-petross-projects.vercel.app) • [📖 Documentation](./docs) • [🔄 API Migration](./SUPERHERO_API_MIGRATION.md) • [🐛 Report Bug](https://github.com/StrayDogSyn/Marvel-Quiz/issues)
+[🚀 Live Demo](https://marvel-quiz-project-gz64pgi9x-eric-hunter-petross-projects.vercel.app) • [📖 Documentation](./docs) • [🔄 API Migration](./SUPERHERO_API_MIGRATION.md) • [🐛 Report Bug](https://github.com/StrayDogSyn/Marvel-Quiz/issues)
 
 </div>
 
