@@ -4,7 +4,7 @@
 
 ### Test Your Knowledge of the Marvel Universe
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge&logo=github)](https://straydogsyn.github.io/Marvel-Quiz)
+[![Live Demo](https://img.shields.io/badge/demo-live-success?style=for-the-badge&logo=vercel)](https://marvel-quiz-straydogsyn.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](./LICENSE)
 [![Version](https://img.shields.io/badge/version-2.0.0-blue?style=for-the-badge)](./docs/CHANGELOG.md)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](./docs/CONTRIBUTING.md)
@@ -12,7 +12,7 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=flat-square&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 [![Marvel API](https://img.shields.io/badge/Marvel-API-ED1D24?style=flat-square&logo=marvel&logoColor=white)](https://developer.marvel.com/)
-[![Maintained](https://img.shields.io/badge/Maintained-Yes-green?style=flat-square)](https://github.com/StrayDogSyndicate/Marvel-Quiz/graphs/commit-activity)
+[![Maintained](https://img.shields.io/badge/Maintained-Yes-green?style=flat-square)](https://github.com/StrayDogSyn/Marvel-Quiz/graphs/commit-activity)
 
 ---
 
@@ -20,7 +20,7 @@
 
 *An interactive quiz application featuring real Marvel characters and dynamic questions*
 
-[🚀 Live Demo](https://straydogsyn.github.io/Marvel-Quiz) • [📖 Documentation](./docs) • [🐛 Report Bug](https://github.com/StrayDogSyndicate/Marvel-Quiz/issues) • [✨ Request Feature](https://github.com/StrayDogSyndicate/Marvel-Quiz/issues)
+[🚀 Live Demo](https://marvel-quiz-straydogsyn.vercel.app) • [📖 Documentation](./docs) • [🐛 Report Bug](https://github.com/StrayDogSyn/Marvel-Quiz/issues) • [✨ Request Feature](https://github.com/StrayDogSyn/Marvel-Quiz/issues)
 
 </div>
 
@@ -90,7 +90,7 @@ Before you begin, ensure you have:
 ### Option 1: Direct Open (Fastest)
 
 ```bash
-git clone https://github.com/StrayDogSyndicate/Marvel-Quiz.git
+git clone https://github.com/StrayDogSyn/Marvel-Quiz.git
 cd Marvel-Quiz
 # Open index.html in your browser
 ```
@@ -99,7 +99,7 @@ cd Marvel-Quiz
 
 ```bash
 # Clone the repository
-git clone https://github.com/StrayDogSyndicate/Marvel-Quiz.git
+git clone https://github.com/StrayDogSyn/Marvel-Quiz.git
 cd Marvel-Quiz
 
 # Start a local server (choose one):
@@ -110,14 +110,21 @@ php -S localhost:8000             # PHP
 # Open http://localhost:8000
 ```
 
-### Option 3: Deploy to GitHub Pages
+### Option 3: Deploy to Vercel (Recommended for Production)
 
 1. Fork this repository
-2. Go to Settings → Pages
-3. Select "Deploy from a branch" → `main`
-4. Your quiz will be live at `https://yourusername.github.io/Marvel-Quiz`
+2. Visit [vercel.com](https://vercel.com) and sign in
+3. Click "New Project" → Import your forked repository
+4. Deploy with default settings
+5. Your quiz will be live at `https://your-project.vercel.app`
 
-> 📖 **Detailed instructions:** See [Quick Start Guide](./docs/QUICKSTART.md)
+**Why Vercel?**
+- Zero-configuration deployment
+- Automatic HTTPS
+- Global CDN for fast loading
+- Free hosting for personal projects
+
+> 📖 **Alternative deployment options:** See [Quick Start Guide](./docs/QUICKSTART.md) for GitHub Pages, Netlify, and other platforms
 
 ## 📁 Project Structure
 
@@ -371,8 +378,8 @@ Contributions are welcome! Please follow these steps:
 
 ## 🐛 Bug Reports & Feature Requests
 
-- 🐛 **Found a bug?** [Report it here](https://github.com/StrayDogSyndicate/Marvel-Quiz/issues/new?template=bug_report.yml)
-- ✨ **Have an idea?** [Request a feature](https://github.com/StrayDogSyndicate/Marvel-Quiz/issues/new?template=feature_request.yml)
+- 🐛 **Found a bug?** [Report it here](https://github.com/StrayDogSyn/Marvel-Quiz/issues/new?template=bug_report.yml)
+- ✨ **Have an idea?** [Request a feature](https://github.com/StrayDogSyn/Marvel-Quiz/issues/new?template=feature_request.yml)
 
 ## 📚 Documentation
 
@@ -418,8 +425,8 @@ We love contributions! Please read our [Contributing Guide](./docs/CONTRIBUTING.
 
 ### Contributors
 
-<a href="https://github.com/StrayDogSyndicate/Marvel-Quiz/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=StrayDogSyndicate/Marvel-Quiz" />
+<a href="https://github.com/StrayDogSyn/Marvel-Quiz/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=StrayDogSyn/Marvel-Quiz" />
 </a>
 
 ## 📝 License
@@ -433,13 +440,13 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 - **[Font Awesome](https://fontawesome.com/)** - For the comprehensive icon library
 - **[CryptoJS](https://github.com/brix/crypto-js)** - For secure MD5 hashing
 
-## � Stats
+## 📊 Stats
 
-![GitHub stars](https://img.shields.io/github/stars/StrayDogSyndicate/Marvel-Quiz?style=social)
-![GitHub forks](https://img.shields.io/github/forks/StrayDogSyndicate/Marvel-Quiz?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/StrayDogSyndicate/Marvel-Quiz?style=social)
-![GitHub issues](https://img.shields.io/github/issues/StrayDogSyndicate/Marvel-Quiz)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/StrayDogSyndicate/Marvel-Quiz)
+![GitHub stars](https://img.shields.io/github/stars/StrayDogSyn/Marvel-Quiz?style=social)
+![GitHub forks](https://img.shields.io/github/forks/StrayDogSyn/Marvel-Quiz?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/StrayDogSyn/Marvel-Quiz?style=social)
+![GitHub issues](https://img.shields.io/github/issues/StrayDogSyn/Marvel-Quiz)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/StrayDogSyn/Marvel-Quiz)
 
 ---
 

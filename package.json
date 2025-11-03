@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/StrayDogSyndicate/Marvel-Quiz.git"
+    "url": "git+https://github.com/StrayDogSyn/Marvel-Quiz.git"
   },
   "keywords": [
     "marvel",
@@ -33,9 +33,9 @@
   "author": "Stray Dog Syndicate",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/StrayDogSyndicate/Marvel-Quiz/issues"
+    "url": "https://github.com/StrayDogSyn/Marvel-Quiz/issues"
   },
-  "homepage": "https://github.com/StrayDogSyndicate/Marvel-Quiz#readme",
+  "homepage": "https://marvel-quiz-straydogsyn.vercel.app",
   "devDependencies": {},
   "dependencies": {},
   "engines": {

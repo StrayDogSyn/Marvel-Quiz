@@ -53,5 +53,8 @@ temp/
 config.local.js
 secrets.js
 
+# Vercel
+.vercel
+
 # Documentation working files
 docs/PROJECT_ORGANIZATION.md
