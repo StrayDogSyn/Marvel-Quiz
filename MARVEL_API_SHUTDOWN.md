@@ -1,6 +1,14 @@
 # ⚠️ Marvel API Shutdown Notice
 
-## Important Update - October 29, 2025
+## ✅ UPDATE: Project Migrated to SuperHero API
+
+**As of November 2, 2025, this project has been successfully migrated to use the SuperHero API.**
+
+See [SUPERHERO_API_MIGRATION.md](SUPERHERO_API_MIGRATION.md) for complete migration details and setup instructions.
+
+---
+
+## Original Shutdown Notice - October 29, 2025
 
 **The Marvel Developer Portal has been officially shut down and is no longer operational.**
 

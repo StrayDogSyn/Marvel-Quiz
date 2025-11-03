@@ -1,15 +1,16 @@
 /**
  * Marvel Quiz Application
- * A modern, interactive quiz application using the Marvel API
- * @version 2.1.1
+ * A modern, interactive quiz application using the SuperHero API
+ * Migrated from Marvel API (deprecated October 29, 2025)
+ * @version 3.0.0
  */
 
 // ===========================
 // Configuration & Constants
 // ===========================
 const CONFIG = {
-  // API endpoint - uses serverless function to avoid CORS issues
-  API_ENDPOINT: '/api/characters',
+  // API endpoint - uses serverless function to fetch SuperHero API data
+  API_ENDPOINT: '/api/superhero-characters',
   
   // Quiz settings
   DEFAULT_QUESTION_COUNT: 5,
@@ -63,17 +64,15 @@ class QuizState {
 }
 
 // ===========================
-// Marvel API Service
+// SuperHero API Service
 // ===========================
 class MarvelAPIService {
   /**
-   * Fetch Marvel characters using serverless API proxy
+   * Fetch Marvel characters using serverless SuperHero API proxy
    */
-  static async fetchCharacters(limit = 50) {
+  static async fetchCharacters(limit = 30) {
     const params = new URLSearchParams({
-      limit: limit,
-      offset: Math.floor(Math.random() * 100), // Random offset for variety
-      orderBy: '-modified' // Get recently updated characters
+      count: limit
     });
 
     const url = `${CONFIG.API_ENDPOINT}?${params}`;
@@ -91,10 +90,9 @@ class MarvelAPIService {
       const validCharacters = data.data.results.filter(char => 
         char.name && 
         char.description && 
-        char.description.length > 20 &&
+        char.description.length > 10 &&
         char.thumbnail &&
-        char.thumbnail.path &&
-        !char.thumbnail.path.includes('image_not_available')
+        char.thumbnail.path
       );
 
       if (validCharacters.length === 0) {
