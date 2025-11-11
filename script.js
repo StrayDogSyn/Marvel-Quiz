@@ -278,34 +278,56 @@ class QuestionGenerator {
    * Get image URL for character with reliable fallback
    */
   static getCharacterImageUrl(character) {
+    console.log('Getting image for character:', character.name);
+    console.log('Thumbnail data:', character.thumbnail);
+    
     // Try direct path from SuperHero API
     if (character.thumbnail?.path) {
-      return character.thumbnail.path;
+      const url = character.thumbnail.path;
+      console.log('Using thumbnail path:', url);
+      
+      // Validate it's actually a URL
+      if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
+        return url;
+      }
+      
+      console.warn('Invalid thumbnail path, using placeholder');
     }
     
     // Return SVG placeholder as reliable fallback
+    console.log('Using SVG placeholder for:', character.name);
     return this.createPlaceholderSVG(character.name || 'Marvel Hero');
   }
 
   /**
    * Create SVG placeholder for character
    */
-  static createPlaceholderSVG(characterName) {
-    const svg = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400">
-        <defs>
-          <linearGradient id="grad-${Date.now()}" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#ed1d24;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#c41e3a;stop-opacity:1" />
-          </linearGradient>
-        </defs>
-        <rect fill="url(#grad-${Date.now()})" width="300" height="400" rx="15"/>
-        <text x="50%" y="45%" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">MARVEL</text>
-        <text x="50%" y="55%" font-family="Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.9)" text-anchor="middle" dominant-baseline="middle">${characterName}</text>
-      </svg>
-    `.trim();
+  static createPlaceholderSVG(characterName = 'Marvel Hero') {
+    // Clean the name to avoid XML/encoding issues
+    const cleanName = (characterName || 'Marvel Hero')
+      .replace(/[<>&'"]/g, '')
+      .substring(0, 30);
     
-    return 'data:image/svg+xml;base64,' + btoa(svg);
+    const uniqueId = Math.random().toString(36).substring(7);
+    
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400">
+<defs>
+<linearGradient id="grad${uniqueId}" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" style="stop-color:#ed1d24;stop-opacity:1"/>
+<stop offset="100%" style="stop-color:#c41e3a;stop-opacity:1"/>
+</linearGradient>
+</defs>
+<rect fill="url(#grad${uniqueId})" width="300" height="400" rx="15"/>
+<text x="150" y="170" font-family="Arial,sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle">MARVEL</text>
+<text x="150" y="210" font-family="Arial,sans-serif" font-size="18" fill="rgba(255,255,255,0.9)" text-anchor="middle">${cleanName}</text>
+</svg>`;
+    
+    try {
+      return 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svg)));
+    } catch (e) {
+      // If btoa fails, use percent encoding
+      return 'data:image/svg+xml,' + encodeURIComponent(svg);
+    }
   }
 
   /**
@@ -461,8 +483,9 @@ class UIController {
    * Display character image with simple, reliable loading
    */
   displayCharacterImage(imageUrl, characterName = 'Marvel Hero') {
+    // If no URL provided, use placeholder immediately
     if (!imageUrl) {
-      this.elements.characterImage.innerHTML = '';
+      this.showPlaceholder(characterName);
       return;
     }
 
@@ -476,13 +499,55 @@ class UIController {
       return;
     }
 
-    // For external URLs, try to load with simple error handling
+    // For external URLs, create img element with error handling
+    const img = new Image();
+    const wrapper = document.createElement('div');
+    wrapper.className = 'character-image-wrapper';
+    
+    img.className = 'character-img';
+    img.alt = characterName;
+    
+    img.onload = () => {
+      wrapper.innerHTML = '';
+      wrapper.appendChild(img);
+      this.elements.characterImage.innerHTML = '';
+      this.elements.characterImage.appendChild(wrapper);
+    };
+    
+    img.onerror = () => {
+      console.warn(`Failed to load image: ${imageUrl}`);
+      this.showPlaceholder(characterName);
+    };
+    
+    // Show loading state
     this.elements.characterImage.innerHTML = `
       <div class="character-image-wrapper">
-        <img src="${imageUrl}" 
-             alt="${characterName}" 
-             class="character-img"
-             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'image-placeholder\\'><svg width=\\'300\\' height=\\'400\\' viewBox=\\'0 0 300 400\\'><defs><linearGradient id=\\'g\\' x1=\\'0%\\' y1=\\'0%\\' x2=\\'100%\\' y2=\\'100%\\'><stop offset=\\'0%\\' style=\\'stop-color:#ed1d24\\'/><stop offset=\\'100%\\' style=\\'stop-color:#c41e3a\\'/></linearGradient></defs><rect fill=\\'url(#g)\\' width=\\'300\\' height=\\'400\\' rx=\\'15\\'/><text x=\\'150\\' y=\\'180\\' font-family=\\'Arial\\' font-size=\\'28\\' font-weight=\\'bold\\' fill=\\'white\\' text-anchor=\\'middle\\'>MARVEL</text><text x=\\'150\\' y=\\'220\\' font-family=\\'Arial\\' font-size=\\'18\\' fill=\\'rgba(255,255,255,0.8)\\' text-anchor=\\'middle\\'>${characterName}</text></svg></div>';" />
+        <div class="spinner-border text-danger" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    `;
+    
+    // Start loading
+    img.src = imageUrl;
+    
+    // Timeout fallback
+    setTimeout(() => {
+      if (!img.complete) {
+        console.warn(`Image load timeout: ${imageUrl}`);
+        this.showPlaceholder(characterName);
+      }
+    }, 5000);
+  }
+
+  /**
+   * Show placeholder graphic
+   */
+  showPlaceholder(characterName) {
+    const svg = QuestionGenerator.createPlaceholderSVG(characterName);
+    this.elements.characterImage.innerHTML = `
+      <div class="character-image-wrapper">
+        <img src="${svg}" alt="${characterName}" class="character-img" />
       </div>
     `;
   }
