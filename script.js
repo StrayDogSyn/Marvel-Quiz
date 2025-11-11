@@ -260,15 +260,14 @@ class QuestionGenerator {
       ...wrongAnswers.map(c => this.cleanCharacterName(c.name))
     ]);
 
-    // Build image URL with multiple fallbacks
+    // Get image URL - simplified approach
     const imageUrl = this.getCharacterImageUrl(character);
-    const fallbackImages = this.getCharacterImageFallbacks(character);
 
     return {
       type: 'name',
       question: 'Who is this character?',
       image: imageUrl,
-      imageFallbacks: fallbackImages,
+      characterName: character.name,
       answers: answers,
       correctAnswer: this.cleanCharacterName(character.name),
       explanation: character.description || `${character.name} is a Marvel character.`
@@ -276,53 +275,37 @@ class QuestionGenerator {
   }
 
   /**
-   * Get primary image URL for character
+   * Get image URL for character with reliable fallback
    */
   static getCharacterImageUrl(character) {
-    // Priority 1: Direct image URL from SuperHero API
-    if (character.thumbnail?.path && !character.thumbnail.extension) {
+    // Try direct path from SuperHero API
+    if (character.thumbnail?.path) {
       return character.thumbnail.path;
     }
     
-    // Priority 2: Constructed URL from path + extension
-    if (character.thumbnail?.path && character.thumbnail?.extension) {
-      return `${character.thumbnail.path}.${character.thumbnail.extension}`;
-    }
-    
-    // Priority 3: Empty (will trigger fallback)
-    return null;
+    // Return SVG placeholder as reliable fallback
+    return this.createPlaceholderSVG(character.name || 'Marvel Hero');
   }
 
   /**
-   * Get fallback image URLs for character
+   * Create SVG placeholder for character
    */
-  static getCharacterImageFallbacks(character) {
-    const fallbacks = [];
+  static createPlaceholderSVG(characterName) {
+    const svg = `
+      <svg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400">
+        <defs>
+          <linearGradient id="grad-${Date.now()}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#ed1d24;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#c41e3a;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <rect fill="url(#grad-${Date.now()})" width="300" height="400" rx="15"/>
+        <text x="50%" y="45%" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">MARVEL</text>
+        <text x="50%" y="55%" font-family="Arial, sans-serif" font-size="20" fill="rgba(255,255,255,0.9)" text-anchor="middle" dominant-baseline="middle">${characterName}</text>
+      </svg>
+    `.trim();
     
-    // Priority 1: Use imageFallbacks provided by API
-    if (character.imageFallbacks && Array.isArray(character.imageFallbacks)) {
-      fallbacks.push(...character.imageFallbacks);
-    }
-
-    // Priority 2: Add alternative thumbnail formats if available
-    if (character.thumbnail?.path && character.thumbnail.path.startsWith('http')) {
-      const basePath = character.thumbnail.path.replace(/\.[^/.]+$/, '');
-      fallbacks.push(
-        `${basePath}.jpg`,
-        `${basePath}.png`,
-        `${basePath}.webp`
-      );
-    }
-
-    // Priority 3: Add generic Marvel placeholder with character name
-    fallbacks.push(
-      'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="400" viewBox="0 0 300 400"%3E%3Cdefs%3E%3ClinearGradient id="grad" x1="0%25" y1="0%25" x2="100%25" y2="100%25"%3E%3Cstop offset="0%25" style="stop-color:%23ed1d24;stop-opacity:1"/%3E%3Cstop offset="100%25" style="stop-color:%23c41e3a;stop-opacity:1"/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill="url(%23grad)" width="300" height="400" rx="15"/%3E%3Ctext x="50%25" y="45%25" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle"%3EMARVEL%3C/text%3E%3Ctext x="50%25" y="55%25" font-family="Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.9)" text-anchor="middle"%3E' + 
-      encodeURIComponent(character.name || 'Hero') +
-      '%3C/text%3E%3C/svg%3E'
-    );
-
-    // Remove duplicates and filter out empty values
-    return [...new Set(fallbacks)].filter(Boolean);
+    return 'data:image/svg+xml;base64,' + btoa(svg);
   }
 
   /**
@@ -453,9 +436,9 @@ class UIController {
     // Display question
     this.elements.questionText.textContent = question.question;
 
-    // Display character image with fallback handling
-    if (question.image || question.imageFallbacks) {
-      this.loadCharacterImage(question.image, question.imageFallbacks);
+    // Display character image - simplified and reliable
+    if (question.image) {
+      this.displayCharacterImage(question.image, question.characterName);
     } else {
       this.elements.characterImage.innerHTML = '';
     }
@@ -475,153 +458,33 @@ class UIController {
   }
 
   /**
-   * Load character image with fallback chain
+   * Display character image with simple, reliable loading
    */
-  loadCharacterImage(primaryUrl, fallbackUrls = []) {
-    // Create image container with loading state
-    this.elements.characterImage.innerHTML = `
-      <div class="image-container">
-        <div class="image-loading">
-          <div class="spinner-border text-danger" role="status">
-            <span class="visually-hidden">Loading image...</span>
-          </div>
-          <p class="text-muted small mt-2">Loading character...</p>
+  displayCharacterImage(imageUrl, characterName = 'Marvel Hero') {
+    if (!imageUrl) {
+      this.elements.characterImage.innerHTML = '';
+      return;
+    }
+
+    // For data URIs (SVG placeholders), display directly
+    if (imageUrl.startsWith('data:')) {
+      this.elements.characterImage.innerHTML = `
+        <div class="character-image-wrapper">
+          <img src="${imageUrl}" alt="${characterName}" class="character-img" />
         </div>
-        <img src="" alt="Marvel Character" class="character-img img-fluid d-none" />
+      `;
+      return;
+    }
+
+    // For external URLs, try to load with simple error handling
+    this.elements.characterImage.innerHTML = `
+      <div class="character-image-wrapper">
+        <img src="${imageUrl}" 
+             alt="${characterName}" 
+             class="character-img"
+             onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\\'image-placeholder\\'><svg width=\\'300\\' height=\\'400\\' viewBox=\\'0 0 300 400\\'><defs><linearGradient id=\\'g\\' x1=\\'0%\\' y1=\\'0%\\' x2=\\'100%\\' y2=\\'100%\\'><stop offset=\\'0%\\' style=\\'stop-color:#ed1d24\\'/><stop offset=\\'100%\\' style=\\'stop-color:#c41e3a\\'/></linearGradient></defs><rect fill=\\'url(#g)\\' width=\\'300\\' height=\\'400\\' rx=\\'15\\'/><text x=\\'150\\' y=\\'180\\' font-family=\\'Arial\\' font-size=\\'28\\' font-weight=\\'bold\\' fill=\\'white\\' text-anchor=\\'middle\\'>MARVEL</text><text x=\\'150\\' y=\\'220\\' font-family=\\'Arial\\' font-size=\\'18\\' fill=\\'rgba(255,255,255,0.8)\\' text-anchor=\\'middle\\'>${characterName}</text></svg></div>';" />
       </div>
     `;
-
-    const imgElement = this.elements.characterImage.querySelector('img');
-    const loadingElement = this.elements.characterImage.querySelector('.image-loading');
-    
-    let currentFallbackIndex = 0;
-    const allUrls = [primaryUrl, ...fallbackUrls].filter(url => url);
-
-    // Add CORS proxy fallbacks for external images
-    const enhancedUrls = [];
-    allUrls.forEach(url => {
-      if (url && url.startsWith('http') && !url.startsWith('data:')) {
-        enhancedUrls.push(url); // Original URL
-        // Note: CORS proxies often have rate limits and may not be reliable
-        // We'll rely on the SVG fallback instead
-      } else {
-        enhancedUrls.push(url);
-      }
-    });
-
-    const tryLoadImage = (url, retryCount = 0) => {
-      if (!url || currentFallbackIndex >= enhancedUrls.length) {
-        // All URLs failed, show placeholder
-        this.showImagePlaceholder();
-        return;
-      }
-
-      // Create a temporary image to test loading
-      const testImg = new Image();
-      
-      // Enable CORS for cross-origin images
-      testImg.crossOrigin = 'anonymous';
-      
-      let timeoutId;
-      let hasLoaded = false;
-
-      const onSuccess = () => {
-        if (hasLoaded) return; // Prevent double-firing
-        hasLoaded = true;
-        
-        clearTimeout(timeoutId);
-        imgElement.src = url;
-        imgElement.classList.remove('d-none');
-        
-        if (loadingElement) {
-          loadingElement.classList.add('d-none');
-        }
-        
-        // Add fade-in animation
-        imgElement.style.opacity = '0';
-        setTimeout(() => {
-          imgElement.style.transition = 'opacity 0.3s ease';
-          imgElement.style.opacity = '1';
-        }, 10);
-      };
-      
-      const onFailure = (reason) => {
-        if (hasLoaded) return; // Already succeeded
-        hasLoaded = true;
-        
-        clearTimeout(timeoutId);
-        console.warn(`Failed to load image (${reason}): ${url.substring(0, 100)}...`);
-        
-        // Try next fallback
-        currentFallbackIndex++;
-        if (currentFallbackIndex < enhancedUrls.length) {
-          tryLoadImage(enhancedUrls[currentFallbackIndex], 0);
-        } else {
-          this.showImagePlaceholder();
-        }
-      };
-
-      testImg.onload = onSuccess;
-      testImg.onerror = () => onFailure('error event');
-
-      // Set timeout for slow loading images (reduced to 3 seconds for better UX)
-      timeoutId = setTimeout(() => {
-        if (!hasLoaded) {
-          onFailure('timeout');
-        }
-      }, 3000);
-
-      // Start loading
-      testImg.src = url;
-    };
-
-    // Start loading chain
-    if (enhancedUrls.length > 0) {
-      tryLoadImage(enhancedUrls[0]);
-    } else {
-      this.showImagePlaceholder();
-    }
-  }
-
-  /**
-   * Show placeholder when all image URLs fail
-   */
-  showImagePlaceholder() {
-    const loadingElement = this.elements.characterImage.querySelector('.image-loading');
-    const imgElement = this.elements.characterImage.querySelector('img');
-    
-    if (loadingElement) loadingElement.classList.add('d-none');
-    
-    // Create SVG placeholder
-    const placeholder = `
-      <div class="image-placeholder">
-        <svg width="300" height="400" viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#ed1d24;stop-opacity:1" />
-              <stop offset="100%" style="stop-color:#c41e3a;stop-opacity:1" />
-            </linearGradient>
-          </defs>
-          <rect fill="url(#grad1)" width="300" height="400" rx="15"/>
-          <text x="150" y="180" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" text-anchor="middle">
-            MARVEL
-          </text>
-          <text x="150" y="220" font-family="Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.8)" text-anchor="middle">
-            Character Image
-          </text>
-          <text x="150" y="245" font-family="Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.6)" text-anchor="middle">
-            Unavailable
-          </text>
-        </svg>
-      </div>
-    `;
-    
-    if (imgElement) {
-      imgElement.insertAdjacentHTML('afterend', placeholder);
-      imgElement.remove();
-    } else {
-      this.elements.characterImage.innerHTML = placeholder;
-    }
   }
 
   /**
