@@ -164,15 +164,18 @@ export default async function handler(req, res) {
   const { count = 10, difficulty = null, fallback: forceFallback = false } = req.query;
   const limit = Math.min(parseInt(count) || 10, 50);
 
-  // Force fallback if requested or if API token not configured
+  // Always use fallback data for now - SuperHero API images have CORS issues
+  // TODO: Implement image proxy if real-time API data is needed
+  const fallbackData = loadFallbackData();
+  if (fallbackData) {
+    const response = convertFallbackToAPIFormat(fallbackData, limit, difficulty);
+    return res.status(200).json(response);
+  }
+  
+  // If fallback fails, try API (keeping as backup)
   if (forceFallback === 'true' || !SUPERHERO_API_TOKEN) {
     if (!SUPERHERO_API_TOKEN) {
       console.warn('SuperHero API token not configured, using fallback data');
-    }
-    const fallbackData = loadFallbackData();
-    if (fallbackData) {
-      const response = convertFallbackToAPIFormat(fallbackData, limit, difficulty);
-      return res.status(200).json(response);
     }
   }
 
