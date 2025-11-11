@@ -2,8 +2,8 @@
  * Marvel Quiz Application
  * A modern, interactive quiz application using the SuperHero API
  * Migrated from Marvel API (deprecated October 29, 2025)
- * @version 3.0.3
- * @updated 2025-11-10 - Enhanced image loading with multi-layer fallbacks
+ * @version 3.0.4
+ * @updated 2025-11-10 - Fixed CORS and API routing for GitHub Pages
  */
 
 // ===========================
@@ -28,6 +28,10 @@ const CONFIG = {
     COMICS: 'comics'
   }
 };
+
+// Log API endpoint configuration for debugging
+console.log('🔧 API Endpoint configured:', CONFIG.API_ENDPOINT);
+console.log('🌐 Current hostname:', window.location.hostname);
 
 // ===========================
 // State Management
