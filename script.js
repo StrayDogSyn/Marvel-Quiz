@@ -874,6 +874,73 @@ class QuizController {
 }
 
 // ===========================
+// Debug Functions (Global)
+// ===========================
+window.runDebugTests = async function() {
+  const output = document.getElementById('debug-output');
+  const log = document.getElementById('debug-log');
+  output.style.display = 'block';
+  log.textContent = '';
+  
+  function addLog(msg) {
+    log.textContent += msg + '\n';
+  }
+  
+  addLog('🔍 Starting Debug Tests...\n');
+  
+  // Test 1: SVG Placeholder
+  addLog('Test 1: SVG Placeholder Generation');
+  try {
+    const svg = QuestionGenerator.createPlaceholderSVG('Spider-Man');
+    addLog(svg.startsWith('data:image/svg+xml') ? '✅ SVG generated successfully' : '❌ Invalid SVG format');
+  } catch (e) {
+    addLog('❌ SVG generation failed: ' + e.message);
+  }
+  
+  // Test 2: API Call
+  addLog('\nTest 2: API Response Check');
+  try {
+    const response = await fetch('/api/superhero-characters?count=2');
+    addLog('Response status: ' + response.status);
+    const data = await response.json();
+    addLog('API source: ' + data.source);
+    addLog('Characters received: ' + data.data?.results?.length);
+    
+    if (data.data?.results?.length > 0) {
+      const char = data.data.results[0];
+      addLog('\n📊 First Character Data:');
+      addLog('  Name: ' + char.name);
+      addLog('  Thumbnail object: ' + JSON.stringify(char.thumbnail));
+      addLog('  Thumbnail.path: ' + char.thumbnail?.path);
+      
+      // Test 3: Image URL extraction
+      addLog('\nTest 3: Image URL Extraction');
+      const imageUrl = QuestionGenerator.getCharacterImageUrl(char);
+      addLog('  Extracted URL: ' + imageUrl.substring(0, 100) + '...');
+      addLog('  URL type: ' + (imageUrl.startsWith('data:') ? 'SVG Placeholder' : 'External URL'));
+      
+      // Test 4: Image Loading
+      addLog('\nTest 4: Image Loading Test');
+      if (imageUrl.startsWith('http')) {
+        const img = new Image();
+        img.onload = () => addLog('✅ Image loaded successfully!');
+        img.onerror = () => addLog('❌ Image failed to load');
+        img.src = imageUrl;
+        setTimeout(() => {
+          if (!img.complete) addLog('⚠️ Image still loading after 3s...');
+        }, 3000);
+      } else {
+        addLog('ℹ️ Using SVG placeholder (expected if no external URL)');
+      }
+    }
+    
+    addLog('\n✅ All tests completed!');
+  } catch (e) {
+    addLog('❌ API test failed: ' + e.message);
+  }
+};
+
+// ===========================
 // Initialize Application
 // ===========================
 // Wait for DOM to be fully loaded

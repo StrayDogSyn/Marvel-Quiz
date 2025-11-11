@@ -64,6 +64,16 @@
                     <i class="fas fa-play me-2"></i>
                     Start Quiz
                 </button>
+                
+                <!-- Debug Button (hidden by default) -->
+                <button id="debug-btn" class="btn btn-outline-secondary btn-sm mt-3" onclick="window.runDebugTests()">
+                    <i class="fas fa-bug me-2"></i>
+                    Run Debug Tests
+                </button>
+                <div id="debug-output" class="mt-3 p-3 bg-light border rounded" style="display:none; text-align: left; max-height: 400px; overflow-y: auto;">
+                    <h6>Debug Output:</h6>
+                    <pre id="debug-log" style="font-size: 0.8rem; margin: 0;"></pre>
+                </div>
             </div>
         </div>
 
