@@ -2,6 +2,7 @@
   "name": "marvel-quiz",
   "version": "2.0.0",
   "description": "An interactive quiz application testing knowledge of the Marvel Cinematic Universe",
+  "type": "module",
   "main": "script.js",
   "scripts": {
     "start": "npx http-server -p 8000 -o",
