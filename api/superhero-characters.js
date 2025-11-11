@@ -105,37 +105,47 @@ function convertFallbackToAPIFormat(fallbackData, count = 10, difficulty = null)
       limit: count,
       total: selected.length,
       count: selected.length,
-      results: selected.map(q => ({
-        id: q.metadata.character.name,
-        name: q.metadata.character.name,
-        description: q.metadata.character.facts.join(' '),
-        thumbnail: {
-          path: q.metadata.character.thumbnail.replace(/\.[^/.]+$/, ''),
-          extension: q.metadata.character.thumbnail.match(/\.([^/.]+)$/)?.[1] || 'jpg'
-        },
-        powerstats: q.metadata.character.powerstats,
-        biography: {
-          'full-name': q.metadata.character.real_name,
-          'first-appearance': q.metadata.character.first_appearance,
-          'alter-egos': 'No alter egos found.'
-        },
-        work: {
-          occupation: q.metadata.character.teams.join(', ')
-        },
-        appearance: {},
-        connections: {
-          'group-affiliation': q.metadata.character.teams.join(', ')
-        },
-        // Additional quiz data
-        quizData: {
-          question: q.question,
-          options: q.options,
-          answer: q.answer,
-          difficulty: Object.keys(fallbackData.difficulty).find(key => 
-            fallbackData.difficulty[key].includes(q)
-          )
-        }
-      }))
+      results: selected.map(q => {
+        const thumbnailUrl = q.metadata.character.thumbnail;
+        
+        return {
+          id: q.metadata.character.name,
+          name: q.metadata.character.name,
+          description: q.metadata.character.facts.join(' '),
+          thumbnail: {
+            path: thumbnailUrl,
+            extension: '' // Will be handled by frontend fallback system
+          },
+          powerstats: q.metadata.character.powerstats,
+          biography: {
+            'full-name': q.metadata.character.real_name,
+            'first-appearance': q.metadata.character.first_appearance,
+            'alter-egos': 'No alter egos found.'
+          },
+          work: {
+            occupation: q.metadata.character.teams.join(', ')
+          },
+          appearance: {},
+          connections: {
+            'group-affiliation': q.metadata.character.teams.join(', ')
+          },
+          // Image fallbacks
+          imageFallbacks: [
+            thumbnailUrl,
+            // Generic placeholder with character name
+            `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%23ed1d24' width='300' height='400'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dominant-baseline='middle'%3E${encodeURIComponent(q.metadata.character.name || 'Marvel Hero')}%3C/text%3E%3C/svg%3E`
+          ].filter(Boolean),
+          // Additional quiz data
+          quizData: {
+            question: q.question,
+            options: q.options,
+            answer: q.answer,
+            difficulty: Object.keys(fallbackData.difficulty).find(key => 
+              fallbackData.difficulty[key].includes(q)
+            )
+          }
+        };
+      })
     }
   };
 }
@@ -303,13 +313,16 @@ export default async function handler(req, res) {
           // Clean up double periods and extra spaces
           description = description.replace(/\.\./g, '.').replace(/\s+/g, ' ').trim();
           
+          // Generate image URL with fallbacks
+          const imageUrl = char.image?.url || '';
+          
           return {
             id: char.id,
             name: char.name,
             description: description,
             thumbnail: {
-              path: char.image?.url || '',
-              extension: ''
+              path: imageUrl,
+              extension: '' // SuperHero API provides full URL
             },
             // Enhanced metadata
             powerstats: char.powerstats,
@@ -323,7 +336,13 @@ export default async function handler(req, res) {
             totalPower: Object.values(char.powerstats || {})
               .filter(v => v !== 'null' && !isNaN(parseInt(v)))
               .reduce((sum, val) => sum + parseInt(val), 0),
-            primaryTeam: char.connections?.['group-affiliation']?.split(',')[0]?.trim() || 'Independent'
+            primaryTeam: char.connections?.['group-affiliation']?.split(',')[0]?.trim() || 'Independent',
+            // Image fallbacks for frontend
+            imageFallbacks: [
+              imageUrl,
+              // Add generic Marvel placeholder as last resort
+              `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%23ed1d24' width='300' height='400'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial' font-size='24' fill='white' text-anchor='middle' dominant-baseline='middle'%3E${encodeURIComponent(char.name || 'Marvel Hero')}%3C/text%3E%3C/svg%3E`
+            ].filter(Boolean)
           };
         })
       }

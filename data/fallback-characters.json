@@ -14,7 +14,7 @@
             "real_name": "Peter Parker",
             "first_appearance": "Amazing Fantasy #15 (1962)",
             "teams": ["Avengers", "Fantastic Four"],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/0/0c/Spiderman50.jpg",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/620-spider-man.jpg",
             "facts": [
               "Created by Stan Lee and Steve Ditko.",
               "First appeared in Amazing Fantasy #15.",
@@ -43,7 +43,7 @@
             "real_name": "Tony Stark",
             "first_appearance": "Tales of Suspense #39 (1963)",
             "teams": ["Avengers"],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/e/e0/Iron_Man_bleeding_edge.jpg",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/346-iron-man.jpg",
             "facts": [
               "Iron Man is a founding member of the Avengers.",
               "Tony Stark is known for his genius-level intellect and powered armor.",
@@ -72,7 +72,7 @@
             "real_name": "Steve Rogers",
             "first_appearance": "Captain America Comics #1 (1941)",
             "teams": ["Avengers", "S.H.I.E.L.D."],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/3/3d/Captain_America_The_First_Avenger_poster.jpg",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/149-captain-america.jpg",
             "facts": [
               "Enhanced to peak human perfection by the Super Soldier Serum.",
               "His shield is virtually indestructible.",
@@ -101,7 +101,7 @@
             "real_name": "Bruce Banner",
             "first_appearance": "The Incredible Hulk #1 (1962)",
             "teams": ["Avengers", "Defenders"],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/a/aa/Hulk_%28circa_2019%29.png",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/332-hulk.jpg",
             "facts": [
               "Gets stronger as he gets angrier.",
               "Created by gamma radiation exposure.",
@@ -130,7 +130,7 @@
             "real_name": "Thor Odinson",
             "first_appearance": "Journey into Mystery #83 (1962)",
             "teams": ["Avengers"],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/3/3c/Thor_%28Marvel_Comics_character%29.png",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/659-thor.jpg",
             "facts": [
               "God of Thunder from Asgard.",
               "Only those deemed worthy can lift Mjolnir.",
@@ -161,7 +161,7 @@
             "real_name": "Wade Wilson",
             "first_appearance": "The New Mutants #98 (1991)",
             "teams": ["X-Force", "Deadpool Corps"],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/6/6b/Deadpool.png",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/213-deadpool.jpg",
             "facts": [
               "Deadpool is known for breaking the fourth wall and meta humor.",
               "His healing factor rivals Wolverine's.",
@@ -190,7 +190,7 @@
             "real_name": "T'Challa",
             "first_appearance": "Fantastic Four #52 (1966)",
             "teams": ["Avengers"],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/9/9f/Black_Panther_OS_Vol_1_2.png",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/106-black-panther.jpg",
             "facts": [
               "First mainstream black superhero.",
               "King of Wakanda.",
@@ -219,7 +219,7 @@
             "real_name": "James 'Logan' Howlett",
             "first_appearance": "The Incredible Hulk #180 (1974)",
             "teams": ["X-Men", "Avengers", "X-Force"],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/5/5d/Wolverine_%28James_%22Logan%22_Howlett%29.png",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/717-wolverine.jpg",
             "facts": [
               "Has retractable adamantium claws.",
               "Possesses accelerated healing factor.",
@@ -248,7 +248,7 @@
             "real_name": "Charles Xavier",
             "first_appearance": "The X-Men #1 (1963)",
             "teams": ["X-Men", "Illuminati"],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/a/a8/Professor_X.png",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/522-professor-x.jpg",
             "facts": [
               "World's most powerful telepath.",
               "Founded Xavier's School for Gifted Youngsters.",
@@ -277,7 +277,7 @@
             "real_name": "Stephen Strange",
             "first_appearance": "Strange Tales #110 (1963)",
             "teams": ["Avengers", "Defenders", "Illuminati"],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/e/e0/Doctor_Strange_2016_poster.jpg",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/226-doctor-strange.jpg",
             "facts": [
               "Sorcerer Supreme and Master of the Mystic Arts.",
               "Lost the use of his hands in a car accident.",
@@ -308,7 +308,7 @@
             "real_name": "Tony Stark",
             "first_appearance": "Tales of Suspense #39 (1963)",
             "teams": ["Avengers"],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/e/e0/Iron_Man_bleeding_edge.jpg",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/346-iron-man.jpg",
             "facts": [
               "Tony Stark's abilities stem from technology, not mutation.",
               "Scarlet Witch, Cyclops, and Magneto are mutants.",
@@ -336,7 +336,7 @@
             "real_name": "Raven Darkhölme",
             "first_appearance": "Ms. Marvel #16 (1978)",
             "teams": ["Brotherhood of Mutants", "X-Men"],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/0/01/Mystique_%28comics_character%29.jpg",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/437-mystique.jpg",
             "facts": [
               "A master shapeshifter and spy.",
               "Mother of Nightcrawler and adoptive mother of Rogue.",
@@ -365,7 +365,7 @@
             "real_name": "Norrin Radd",
             "first_appearance": "Fantastic Four #48 (1966)",
             "teams": ["Defenders", "Heralds of Galactus"],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/9/98/Silver_Surfer.png",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/595-silver-surfer.jpg",
             "facts": [
               "Sacrificed himself to save his homeworld Zenn-La.",
               "Wields the Power Cosmic granted by Galactus.",
@@ -394,7 +394,7 @@
             "real_name": "Thanos",
             "first_appearance": "Iron Man #55 (1973)",
             "teams": ["Infinity Watch", "Dark Order"],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/1/1c/Thanos_%28Marvel_Comics_character%29.png",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/655-thanos.jpg",
             "facts": [
               "Born on Titan, moon of Saturn.",
               "Obsessed with Death and courting her favor.",
@@ -423,7 +423,7 @@
             "real_name": "Loki Laufeyson",
             "first_appearance": "Venus #6 (1949) / Journey into Mystery #85 (1962)",
             "teams": ["Asgard", "Cabal"],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/1/1d/Loki_%28Marvel_Comics_character%29.png",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/413-loki.jpg",
             "facts": [
               "God of Mischief and adoptive brother of Thor.",
               "Actually a Frost Giant, son of Laufey.",
@@ -452,7 +452,7 @@
             "real_name": "Hank Pym",
             "first_appearance": "Tales to Astonish #27 (1962)",
             "teams": ["Avengers"],
-            "thumbnail": "https://upload.wikimedia.org/wikipedia/en/5/52/Ant-Man_%28Hank_Pym%29.png",
+            "thumbnail": "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/38-ant-man.jpg",
             "facts": [
               "Discovered Pym Particles that enable size manipulation.",
               "Created Ultron as a peacekeeping AI that went rogue.",
