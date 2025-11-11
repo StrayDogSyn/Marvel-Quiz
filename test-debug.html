@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Debug Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Image Loading Debug</h1>
+        
+        <div class="card mt-4">
+            <div class="card-body">
+                <h3>Test 1: SVG Placeholder Function</h3>
+                <div id="test1"></div>
+                <button class="btn btn-primary mt-2" onclick="testPlaceholder()">Generate Placeholder</button>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h3>Test 2: CDN Image</h3>
+                <div id="test2"></div>
+                <button class="btn btn-primary mt-2" onclick="testCDNImage()">Load CDN Image</button>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h3>Test 3: Character Image Display</h3>
+                <div id="character-image"></div>
+                <button class="btn btn-primary mt-2" onclick="testCharacterImage()">Test Display Function</button>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h3>Test 4: API Response</h3>
+                <pre id="test4" style="background: #f5f5f5; padding: 15px; border-radius: 5px;"></pre>
+                <button class="btn btn-primary mt-2" onclick="testAPI()">Fetch API Data</button>
+            </div>
+        </div>
+
+        <div class="card mt-4 bg-light">
+            <div class="card-body">
+                <h3>Console Output</h3>
+                <pre id="console" style="background: #333; color: #0f0; padding: 15px; border-radius: 5px; max-height: 300px; overflow: auto;"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Override console.log to also display in page
+        const originalLog = console.log;
+        const originalWarn = console.warn;
+        const originalError = console.error;
+        
+        const consoleDiv = document.getElementById('console');
+        
+        function addToConsole(type, ...args) {
+            const msg = args.map(a => typeof a === 'object' ? JSON.stringify(a, null, 2) : String(a)).join(' ');
+            const time = new Date().toLocaleTimeString();
+            consoleDiv.textContent += `[${time}] ${type}: ${msg}\n`;
+            consoleDiv.scrollTop = consoleDiv.scrollHeight;
+        }
+        
+        console.log = (...args) => { originalLog(...args); addToConsole('LOG', ...args); };
+        console.warn = (...args) => { originalWarn(...args); addToConsole('WARN', ...args); };
+        console.error = (...args) => { originalError(...args); addToConsole('ERROR', ...args); };
+
+        function testPlaceholder() {
+            console.log('Testing placeholder SVG generation...');
+            const svg = QuestionGenerator.createPlaceholderSVG('Spider-Man');
+            console.log('Generated SVG:', svg.substring(0, 100) + '...');
+            document.getElementById('test1').innerHTML = `
+                <img src="${svg}" alt="Placeholder" class="character-img" />
+            `;
+            console.log('✅ Placeholder displayed');
+        }
+
+        function testCDNImage() {
+            console.log('Testing CDN image load...');
+            const url = 'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/620-spider-man.jpg';
+            const img = new Image();
+            
+            img.onload = () => {
+                console.log('✅ CDN image loaded successfully');
+                document.getElementById('test2').innerHTML = `
+                    <img src="${url}" alt="Spider-Man" class="character-img" />
+                `;
+            };
+            
+            img.onerror = () => {
+                console.error('❌ CDN image failed to load');
+                document.getElementById('test2').innerHTML = '<p class="text-danger">Image failed to load</p>';
+            };
+            
+            img.src = url;
+        }
+
+        function testCharacterImage() {
+            console.log('Testing displayCharacterImage function...');
+            
+            // Create a mock UIController
+            const mockUI = {
+                elements: {
+                    characterImage: document.getElementById('character-image')
+                },
+                showPlaceholder: function(name) {
+                    const svg = QuestionGenerator.createPlaceholderSVG(name);
+                    this.elements.characterImage.innerHTML = `
+                        <div class="character-image-wrapper">
+                            <img src="${svg}" alt="${name}" class="character-img" />
+                        </div>
+                    `;
+                },
+                displayCharacterImage: UIController.prototype.displayCharacterImage
+            };
+            
+            const testUrl = 'https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/images/sm/346-iron-man.jpg';
+            console.log('Testing with URL:', testUrl);
+            
+            mockUI.displayCharacterImage.call(mockUI, testUrl, 'Iron Man');
+            console.log('✅ Display function called');
+        }
+
+        async function testAPI() {
+            console.log('Testing API call...');
+            try {
+                const response = await fetch('/api/superhero-characters?count=1');
+                const data = await response.json();
+                
+                console.log('API Response:', data);
+                document.getElementById('test4').textContent = JSON.stringify(data, null, 2);
+                
+                if (data.data && data.data.results && data.data.results.length > 0) {
+                    const char = data.data.results[0];
+                    console.log('First character:', char.name);
+                    console.log('Thumbnail:', char.thumbnail);
+                    console.log('Image URL:', char.thumbnail?.path);
+                }
+                
+                console.log('✅ API test complete');
+            } catch (error) {
+                console.error('❌ API test failed:', error);
+                document.getElementById('test4').textContent = 'API Error: ' + error.message;
+            }
+        }
+
+        console.log('🚀 Debug page loaded - Click buttons to run tests');
+    </script>
+</body>
+</html>
