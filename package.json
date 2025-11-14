@@ -32,6 +32,17 @@
     "web-app"
   ],
   "author": "Stray Dog Syndicate",
+  "contributors": [
+    {
+      "name": "Eric 'Hunter' Petross",
+      "url": "https://github.com/StrayDogSyn"
+    },
+    {
+      "name": "Mia 'Mausi' Smith",
+      "role": "Programming Manager",
+      "url": "https://github.com/miasmith81"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/StrayDogSyn/Marvel-Quiz/issues"
